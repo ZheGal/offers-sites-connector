@@ -5,10 +5,28 @@ namespace App\Classes;
 class General
 {
     private $settings;
+    private $variables;
 
     public function __construct()
     {
         $this->get_settings();
+    }
+
+    public function set($key, $value = null)
+    {
+        if (!empty($key) || !empty($value)) {
+            $this->variables[$key] = $value;
+        }
+    }
+
+    public function run()
+    {
+        
+    }
+
+    private function render()
+    {
+        $vars = $this->variables;
     }
 
     private function get_settings()

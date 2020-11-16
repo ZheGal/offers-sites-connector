@@ -9,3 +9,7 @@ $site = new General();
 $additional = new Additional();
 $parameters = new Parameters();
 
+// Назначаем переменные, которые выводятся на страницах сайта
+$site->set('a', 'shit');
+
+$site->run();
