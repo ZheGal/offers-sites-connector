@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+$rootPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..']);
+$htaccessPath = implode(DIRECTORY_SEPARATOR, [$rootPath, '.htaccess']);
+$settingsPath = implode(DIRECTORY_SEPARATOR, [$rootPath, 'settings.json']);
+
+$htaccessExamplePath = implode(DIRECTORY_SEPARATOR, [__DIR__, '.htaccess.example']);
+$settingsExamplePath = implode(DIRECTORY_SEPARATOR, [__DIR__, 'settings_example.php']);
+
+if (!file_exists($htaccessPath)) {
+    file_put_contents($htaccessPath, file_get_contents($htaccessExamplePath));
+}
+
+if (!file_exists($settingsPath)) {
+    $settingsArray = require($settingsExamplePath);
+    $settingsJson = json_encode($settingsArray, JSON_PRETTY_PRINT);
+    file_put_contents($settingsPath, $settingsJson);
+}
