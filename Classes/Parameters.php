@@ -6,6 +6,6 @@ class Parameters
 {
     public function __construct()
     {
-        echo 'params';
+        //
     }
 }

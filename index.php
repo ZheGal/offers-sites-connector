@@ -6,3 +6,5 @@ use App\Classes\Additional;
 use App\Classes\Parameters;
 
 $site = new General();
+$additional = new Additional();
+$parameters = new Parameters();

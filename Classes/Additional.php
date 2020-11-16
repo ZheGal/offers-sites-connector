@@ -6,6 +6,6 @@ class Additional
 {
     public function __construct()
     {
-        echo 'additional';
+        //
     }
 }
