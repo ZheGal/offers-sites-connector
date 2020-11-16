@@ -4,6 +4,9 @@ spl_autoload_register(function ($class) {
     $prefix = 'App\\';
     $base_dir = __DIR__;
 
+    echo $class;
+    die;
+
     $len = strlen($prefix);
     if (strncmp($prefix, $class, $len) !== 0) {
         return;
