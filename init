@@ -5,7 +5,7 @@ $rootPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..']);
 $htaccessPath = implode(DIRECTORY_SEPARATOR, [$rootPath, '.htaccess']);
 $settingsPath = implode(DIRECTORY_SEPARATOR, [$rootPath, 'settings.json']);
 
-$htaccessExamplePath = implode(DIRECTORY_SEPARATOR, [__DIR__, '.htaccess.example']);
+$htaccessExamplePath = implode(DIRECTORY_SEPARATOR, [__DIR__, 'htaccess.example']);
 $settingsExamplePath = implode(DIRECTORY_SEPARATOR, [__DIR__, 'settings_example.php']);
 
 if (!file_exists($htaccessPath)) {

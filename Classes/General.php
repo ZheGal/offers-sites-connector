@@ -9,6 +9,7 @@ class General
 
     public function __construct()
     {
+        $this->check_htaccess();
         $this->get_settings();
         $this->utm_settings();
     }
@@ -156,5 +157,15 @@ class General
         $script = "<script src=\"{$link}\"></script>";
 
         return str_replace('</head>', "{$script}\n</head>", $view);
+    }
+
+    public function check_htaccess()
+    {
+        $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', '.htaccess']);
+        $pathExm = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'htaccess.example']);
+        if (!file_exists($path)) {
+            $raw = file_get_contents($pathExm);
+            file_put_contents($path, $raw);
+        }
     }
 }
