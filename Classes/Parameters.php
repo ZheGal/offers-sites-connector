@@ -2,7 +2,7 @@
 
 namespace App\Classes;
 
-class Parameters
+class Parameters extends General
 {
     public function __construct()
     {
@@ -34,24 +34,5 @@ class Parameters
         $result['code'] = ($this->settings->yandex) ? $this->settings->yandex : false;
 
         return $result;
-    }
-
-    public function get_user_ip()
-    {
-        $c = false;
-        
-        if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-            $c = $_SERVER['HTTP_CF_CONNECTING_IP'];
-        } else {
-            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-                 $c = $_SERVER['HTTP_CLIENT_IP'];
-            } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
-                 $c = $_SERVER['REMOTE_ADDR'];
-            } else {
-                 $c = $_SERVER['HTTP_X_FORWARDED_FOR'];
-            }
-        }
-
-        return $c;
     }
 }

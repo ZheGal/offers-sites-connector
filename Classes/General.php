@@ -38,7 +38,7 @@ class General
         echo $view;
     }
 
-    private function render()
+    public function render()
     {
         $vars = $this->variables;
         $requestAr = explode("?", $_SERVER['REQUEST_URI']);
@@ -94,14 +94,14 @@ class General
         file_put_contents($settingsPath, $settingsJson);
     }
 
-    private function error($code)
+    public function error($code)
     {
         header("Location:/");
         // return http_response_code($code);
         // die;
     }
 
-    private function get_file_path($path)
+    public function get_file_path($path)
     {
         $dir = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', 'public', $path]);
         if (file_exists($dir)) {
@@ -167,5 +167,30 @@ class General
             $raw = file_get_contents($pathExm);
             file_put_contents($path, $raw);
         }
+    }
+
+    public function get_ip_info()
+    {
+        $ip = $this->get_user_ip();
+        $url = "http://ipinfo.io/{$ip}?token=8b50524357b6bc";
+    }
+
+    public function get_user_ip()
+    {
+        $c = false;
+        
+        if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+            $c = $_SERVER['HTTP_CF_CONNECTING_IP'];
+        } else {
+            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                 $c = $_SERVER['HTTP_CLIENT_IP'];
+            } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
+                 $c = $_SERVER['REMOTE_ADDR'];
+            } else {
+                 $c = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            }
+        }
+
+        return $c;
     }
 }
