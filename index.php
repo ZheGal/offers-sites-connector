@@ -2,10 +2,19 @@
 require_once('autoload.php');
 
 use App\Classes\General;
+use App\Classes\Router;
 use App\Classes\Templates;
 
 $site = new General();
 $templates = new Templates($site);
+
+$router = new Router();
+
+// если путь совпадает с тем, который есть в роутере, подключаем его
+// иначе ищем файл в папке public
+if ($router->covergence()) {
+    $router->connect();
+}
 
 // Назначаем переменные, которые выводятся на страницах сайта
 $site->set('metrika', $templates->get('metrika'));
