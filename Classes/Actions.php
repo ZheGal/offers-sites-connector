@@ -6,6 +6,8 @@ class Actions
 {
     public static function connectorUpdate()
     {
-        echo 'connector update';
+        echo __DIR__;
+        // здесь мы должны перейти в папку app и сделать git pull через exec
+        die;
     }
 }
