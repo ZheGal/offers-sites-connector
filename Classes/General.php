@@ -10,6 +10,7 @@ class General
     public function __construct()
     {
         $this->check_htaccess();
+        $this->check_folder();
         $this->get_settings();
         $this->utm_settings();
     }
@@ -32,6 +33,10 @@ class General
     public function run()
     {
         $view = $this->render();
+        if ($this->get_partner() == 'neogara') {
+            $this->get_click_neogara();
+        }
+
         if ($this->get_partner() == 'neogara_js') {
             $view = $this->add_neo_js($view);
         }
@@ -44,7 +49,7 @@ class General
         $requestAr = explode("?", $_SERVER['REQUEST_URI']);
         $fileName = trim($requestAr[0], '\/ ');
         $fileName = (empty($fileName)) ? 'index.php' : $fileName;
-        
+
         $fileNamePath = $this->get_file_path($fileName);
 
         if ($fileNamePath) {
@@ -96,9 +101,11 @@ class General
 
     public function error($code)
     {
-        header("Location:/");
-        // return http_response_code($code);
-        // die;
+        switch ($code) {
+            case '404':
+                header("HTTP/1.0 404 Not Found");
+            break;
+        }
     }
 
     public function get_file_path($path)
@@ -192,5 +199,63 @@ class General
         }
 
         return $c;
+    }
+
+    public function get_user_city()
+    {
+        return false;
+    }
+
+    public function get_user_country()
+    {
+        return false;
+    }
+
+    public function get_pid()
+    {
+        return false;
+    }
+
+    public function get_pipeline()
+    {
+        return false;
+    }
+
+    public function get_ref()
+    {
+        return false;
+    }
+
+    public function check_folder()
+    {
+        $path =  implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', 'public']);
+        if (!file_exists($path)) {
+            mkdir($path);
+        }
+
+        if (file_exists($path) && !is_dir($path)) {
+            unlink($path);
+            mkdir($path);
+        }
+    }
+
+    public function get_click_neogara()
+    {
+        $array = json_encode([
+            'pid' => $this->get_pid(),
+            'pipeline' => $this->get_pipeline(),
+            'ref' => $this->get_ref(),
+            'ip' => $this->get_user_ip(),
+            'city' => $this->get_user_city(),
+            'country' => $this->get_user_country()
+        ]);
+        echo $array;
+        
+        $click = $this->send_post($url, $array);
+    }
+
+    public function send_post($url, $data = '')
+    {
+        
     }
 }

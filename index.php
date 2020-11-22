@@ -1,6 +1,8 @@
 <?php
 require_once('autoload.php');
 
+session_start();
+
 use App\Classes\General;
 use App\Classes\Router;
 use App\Classes\Templates;
@@ -24,5 +26,6 @@ $site->set('pixel', 'Code Pixel');
 $site->set('pixel_img', 'Code Pixel Img');
 $site->set('pixel_img_pageview', 'Code Pixel Img PageView');
 $site->set('phone_code', 'Phone Code');
+$site->set('partner_name', $site->get_partner());
 
 $site->run();
