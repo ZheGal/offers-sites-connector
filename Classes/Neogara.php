@@ -110,6 +110,7 @@ class Neogara
 
         if ($request['result'] == 'ok') {
             $back = "/".$this->settings['return'];
+            unset($_SESSION);
             header("Location:{$back}");
         }
     }
@@ -131,17 +132,21 @@ class Neogara
 
     public function get_pid()
     {
-        return $this->settings['pid'];
+        return ($_GET['pid']) ? $_GET['pid'] : $this->settings['pid'];
     }
 
     public function get_pipeline()
     {
-        $group = $this->settings['group'];
-        $offer = $this->settings['offer'];
-        if (isset($group) && !empty($group)) {
-            return $group;
+        if (!isset($_GET['group'])) {
+            $group = $this->settings['group'];
+            $offer = $this->settings['offer'];
+            if (isset($group) && !empty($group)) {
+                return $group;
+            }
+            return ($offer) ? $offer : $group;
+        } else {
+            return $_GET['group'];
         }
-        return ($offer) ? $offer : $group;
     }
 
     public function get_ref()

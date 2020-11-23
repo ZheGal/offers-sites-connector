@@ -29,6 +29,7 @@ class GlobalMaxis
     public function send_to_thanks()
     {
         $redirect = trim($this->settings['return'],'\/ ');
+        unset($_SESSION);
         header("Location:/{$redirect}");
     }
 

@@ -14,7 +14,11 @@ class Parameters extends General
     public function get_metrika_params()
     {
         $result = [];
-        $result['code'] = ($this->settings->yandex) ? $this->settings->yandex : false;
+        if (isset($_GET['yandex'])) {
+            $result['code'] = $_GET['yandex'];
+        } else {
+            $result['code'] = ($this->settings->yandex) ? $this->settings->yandex : false;
+        }
         $result['user_ip'] = $this->get_user_ip();
 
         return $result;
@@ -23,7 +27,11 @@ class Parameters extends General
     public function get_metrika_thanks_params()
     {
         $result = [];
-        $result['code'] = ($this->settings->yandex) ? $this->settings->yandex : false;
+        if (isset($_GET['yandex'])) {
+            $result['code'] = $_GET['yandex'];
+        } else {
+            $result['code'] = ($this->settings->yandex) ? $this->settings->yandex : false;
+        }
 
         return $result;
     }
@@ -31,7 +39,11 @@ class Parameters extends General
     public function get_metrika_targetclick_params()
     {
         $result = [];
-        $result['code'] = ($this->settings->yandex) ? $this->settings->yandex : false;
+        if (isset($_GET['yandex'])) {
+            $result['code'] = $_GET['yandex'];
+        } else {
+            $result['code'] = ($this->settings->yandex) ? $this->settings->yandex : false;
+        }
 
         return $result;
     }
