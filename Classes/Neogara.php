@@ -63,8 +63,7 @@ class Neogara
         }
 
         $find = preg_match_all("(<form[^<>]+>)", $view, $out);
-        print_r($out);
-        die;
+        
         if (isset($out[0])) {
             foreach ($out[0] as $form) {
                 $view = str_replace($form, "{$form}\n{$input_str}", $view);
