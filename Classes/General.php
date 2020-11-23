@@ -2,10 +2,13 @@
 
 namespace App\Classes;
 
+use App\Classes\Neogara;
+
 class General
 {
     public $settings;
     public $variables;
+    public $location;
 
     public function __construct()
     {
@@ -13,6 +16,7 @@ class General
         $this->check_folder();
         $this->get_settings();
         $this->utm_settings();
+        $this->get_location();
     }
 
     public function get_file()
@@ -33,14 +37,35 @@ class General
     public function run()
     {
         $view = $this->render();
+        if (!$view) {
+            return false;
+        }
         if ($this->get_partner() == 'neogara') {
-            $this->get_click_neogara();
+            $params = ['location' => $this->location];
+            $neogara = new Neogara($params);
+            $neogara->click_reg();
         }
 
         if ($this->get_partner() == 'neogara_js') {
             $view = $this->add_neo_js($view);
         }
+
+        $view = $this->check_errors($view);
+
         echo $view;
+    }
+
+    public function check_errors($view)
+    {
+        $q = '';
+        if (isset($_SESSION['error'])) {
+            foreach ($_SESSION['error'] as $error) {
+                $q .= "<script>alert('{$error}')</script>";
+            }
+        }
+        unset ($_SESSION['error']);
+        $view = str_replace('</body', $q."\n</body", $view);
+        return $view;
     }
 
     public function render()
@@ -61,7 +86,7 @@ class General
             return $content;
         }
 
-        return $this->error(404);
+        return false;
     }
 
     public function get_settings()
@@ -178,8 +203,10 @@ class General
 
     public function get_ip_info()
     {
-        $ip = $this->get_user_ip();
+        // $ip = $this->get_user_ip();
+        $ip = '185.41.250.246';
         $url = "http://ipinfo.io/{$ip}?token=8b50524357b6bc";
+        return $url;
     }
 
     public function get_user_ip()
@@ -201,31 +228,6 @@ class General
         return $c;
     }
 
-    public function get_user_city()
-    {
-        return false;
-    }
-
-    public function get_user_country()
-    {
-        return false;
-    }
-
-    public function get_pid()
-    {
-        return false;
-    }
-
-    public function get_pipeline()
-    {
-        return false;
-    }
-
-    public function get_ref()
-    {
-        return false;
-    }
-
     public function check_folder()
     {
         $path =  implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', 'public']);
@@ -239,23 +241,18 @@ class General
         }
     }
 
-    public function get_click_neogara()
+    public function get_location()
     {
-        $array = json_encode([
-            'pid' => $this->get_pid(),
-            'pipeline' => $this->get_pipeline(),
-            'ref' => $this->get_ref(),
-            'ip' => $this->get_user_ip(),
-            'city' => $this->get_user_city(),
-            'country' => $this->get_user_country()
-        ]);
-        echo $array;
-        
-        $click = $this->send_post($url, $array);
-    }
-
-    public function send_post($url, $data = '')
-    {
-        
+        if (isset($_SESSION['location'])) {
+            $this->location = $_SESSION['location'];
+            return true;
+        }
+        $url = $this->get_ip_info();
+        $raw = file_get_contents($url);
+        $json = json_decode($raw, 1);
+        if (!empty($raw) && is_array($json)) {
+            $this->location = $json;
+        }
+        return false;
     }
 }

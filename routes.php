@@ -3,5 +3,6 @@
 return [
     'api/selfUpdate' => ['GET', 'Actions@ConnectorUpdate'],
     'api/copySite' => ['GET', 'Actions@MakePublicCopy'],
-    'api/updateSettings' => ['POST', 'Actions@UpdateSettings']
+    'api/updateSettings' => ['POST', 'Actions@UpdateSettings'],
+    'send.php' => ['POST', 'Actions@SendForm']
 ];
