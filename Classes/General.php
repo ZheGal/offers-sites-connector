@@ -45,7 +45,6 @@ class General
             $params = ['location' => $this->location];
             $neogara = new Neogara($params);
             $view = $neogara->click_reg($view);
-            die;
         }
 
         if ($this->get_partner() == 'neogara_js') {

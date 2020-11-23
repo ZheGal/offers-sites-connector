@@ -68,8 +68,7 @@ class Neogara
                 $view = str_replace($form, "{$form}\n{$input_str}", $view);
             }
         }
-        echo $view;
-        die;
+        return $view;
     }
 
     public function lead_reg()
