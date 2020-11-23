@@ -3,6 +3,7 @@
 namespace App\Classes;
 
 use App\Classes\Neogara;
+use App\Classes\GlobalMaxis;
 
 class Send
 {
@@ -20,7 +21,7 @@ class Send
 
     public function global()
     {
-
+        $self = new GlobalMaxis();
     }
 
     public function send_mail()

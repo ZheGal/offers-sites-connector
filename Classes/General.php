@@ -45,6 +45,8 @@ class General
             $params = ['location' => $this->location];
             $neogara = new Neogara($params);
             $view = $neogara->click_reg($view);
+        } else {
+            $view = $this->get_ref_field($view);
         }
 
         if ($this->get_partner() == 'neogara_js') {
@@ -55,6 +57,20 @@ class General
         $view = $this->check_errors($view);
 
         echo $view;
+    }
+
+    public function get_ref_field($view)
+    {
+        $ref = $this->get_ref();
+        $input_str = "\n\t<input type=\"hidden\" name=\"_ref\" value=\"{$ref}\">";
+        $find = preg_match_all("(<form[^<>]+>)", $view, $out);
+        
+        if (isset($out[0])) {
+            foreach ($out[0] as $form) {
+                $view = str_replace($form, "{$form}\n{$input_str}", $view);
+            }
+        }
+        return $view;
     }
 
     public function check_utm($view)
