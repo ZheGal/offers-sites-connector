@@ -102,10 +102,10 @@ class Neogara
         if (isset($request['error'])) {
             if (is_array($request['message'])) {
                 foreach ($request['message'] as $mes) {
-                    $_SESSION['error'][] = "{$request['statusCode']} {$request['error']}: {$mes}";
+                    $_SESSION['error'][$request['statusCode']] = "{$request['statusCode']} {$request['error']}: {$mes}";
                 }
             } else {
-                $_SESSION['error'][] = "{$request['statusCode']} {$request['error']}: {$request['message']}";
+                $_SESSION['error'][$request['statusCode']] = "{$request['statusCode']} {$request['error']}: {$request['message']}";
             }
             $back = ($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
             header("Location:{$back}");

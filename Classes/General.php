@@ -64,7 +64,7 @@ class General
                 $q .= "<script>alert('{$error}')</script>";
             }
         }
-        unset ($_SESSION['error']);
+        unset($_SESSION['error']);
         $view = str_replace('</body', $q."\n</body", $view);
         return $view;
     }
