@@ -51,9 +51,25 @@ class General
             $view = $this->add_neo_js($view);
         }
 
+        $view = $this->check_utm($view);
         $view = $this->check_errors($view);
 
         echo $view;
+    }
+
+    public function check_utm($view)
+    {
+        $a = (!empty($_GET)) ? '?'.http_build_query($_GET) : false;
+        
+        $find = preg_match_all('/action=["|\']([\s\S]+?)["|\']/', $view, $forms);
+        
+        if ($find) {
+            foreach ($forms[0] as $id => $form) {
+                $rep = str_replace($forms[1][$id], $forms[1][$id].$a, $form);
+                $view = str_replace($form, $rep, $view);
+            }
+        }
+        return $view;
     }
 
     public function check_errors($view)
