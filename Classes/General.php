@@ -199,6 +199,12 @@ class General
 
     public function get_partner()
     {
+        if (isset($_GET['partner'])) {
+            $gets = $_GET['partner'];
+            if ($gets == 'global' or $gets == 'neogara' or $gets == 'neogara_js') {
+                return $gets;
+            }
+        }
         $partners = $this->settings['partner'];
         foreach ($partners as $partner => $value) {
             $all[] = $partner;
