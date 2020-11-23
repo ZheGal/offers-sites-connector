@@ -40,7 +40,7 @@ class General
         if (!$view) {
             return false;
         }
-        $this->get_ref();
+        $current = $this->get_ref();
         if ($this->get_partner() == 'neogara') {
             $params = ['location' => $this->location];
             $neogara = new Neogara($params);
@@ -204,8 +204,7 @@ class General
 
     public function get_ip_info()
     {
-        // $ip = $this->get_user_ip();
-        $ip = '185.41.250.246';
+        $ip = $this->get_user_ip();
         $url = "http://ipinfo.io/{$ip}?token=8b50524357b6bc";
         return $url;
     }
@@ -262,6 +261,6 @@ class General
     public function get_ref()
     {
         $schema = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
-        $_SESSION['ref'] = "{$schema}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        return "{$schema}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
     }
 }
