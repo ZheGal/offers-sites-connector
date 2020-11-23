@@ -63,6 +63,8 @@ class Neogara
         }
 
         $find = preg_match_all("(<form[^<>]+>)", $view, $out);
+        print_r($out);
+        die;
         if (isset($out[0])) {
             foreach ($out[0] as $form) {
                 $view = str_replace($form, "{$form}\n{$input_str}", $view);
@@ -94,10 +96,9 @@ class Neogara
             'url' => $url,
             'content' => $array
         ]);
-        unset($_SESSION['ref']);
-        unset($_SESSION['click_id']);
 
         print_r($request);
+        die;
         
         if (isset($request['error'])) {
             if (is_array($request['message'])) {
