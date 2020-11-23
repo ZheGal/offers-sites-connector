@@ -80,6 +80,8 @@ class Neogara
             'content' => $array
         ]);
         unset($_SESSION['click_id']);
+
+        print_r($request);
         
         if (isset($request['error'])) {
             if (is_array($request['message'])) {
