@@ -88,7 +88,7 @@ class Neogara
             'click' => $this->get_click_id(),
         ]);
 
-        $url = 'https://admin.neogara.com//register/lid'; // prod
+        $url = 'https://admin.neogara.com/register/lid'; // prod
         // $url = 'https://stage.admin.neogara.com/register/lid'; // dev
         
         $request = $this->send_request([
