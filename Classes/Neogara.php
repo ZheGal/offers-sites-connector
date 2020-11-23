@@ -23,7 +23,7 @@ class Neogara
         }
     }
 
-    public function click_reg()
+    public function click_reg($view = '')
     {
         $array = json_encode([
             'pid' => $this->get_pid(),
@@ -49,11 +49,27 @@ class Neogara
             } else {
                 $_SESSION['error'][] = "{$request['statusCode']} {$request['error']}: {$request['message']}";
             }
+            return $view;
         }
-        
-        if (isset($request['id'])) {
-            $_SESSION['click_id'] = $request['id'];
+
+        $inputs = [
+            'ref' => $this->get_ref(),
+            'click' => $request['id']
+        ];
+
+        $input_str = '';
+        foreach ($inputs as $key => $value) {
+            $input_str .= "\n\t<input type=\"hidden\" name=\"_{$key}\" value=\"{$value}\">";
         }
+
+        $find = preg_match_all("(<form[^<>]+>)", $view, $out);
+        if (isset($out[0])) {
+            foreach ($out[0] as $form) {
+                $view = str_replace($form, "{$form}\n{$input_str}", $view);
+            }
+        }
+        echo $view;
+        die;
     }
 
     public function lead_reg()
@@ -69,7 +85,7 @@ class Neogara
             'ip' => $this->get_user_ip(),
             'city' => $this->get_user_city(),
             'country' => $this->get_user_country(),
-            'click' => $_SESSION['click_id'],
+            'click' => $this->get_click_id(),
         ]);
 
         // $url = 'https://admin.neogara.com//register/lid'; // prod
@@ -102,6 +118,11 @@ class Neogara
         }
     }
 
+    public function get_click_id()
+    {
+        return (isset($_REQUEST['_click'])) ? $_REQUEST['click'] : false;
+    }
+
     public function get_phone()
     {
         return $_REQUEST['phone_number'];
@@ -129,17 +150,13 @@ class Neogara
 
     public function get_ref()
     {
-        if (!isset($_SESSION['ref'])) {
-            $schema = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
-            $_SESSION['ref'] = $schema;
-            return "{$schema}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        }
-        return $_SESSION['ref'];
+        $schema = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
+        return "{$schema}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
     }
 
     public function get_ref_lead()
     {
-        return $_SESSION['ref'];
+        return $_REQUEST['_ref'];
     }
 
     public function get_user_ip()

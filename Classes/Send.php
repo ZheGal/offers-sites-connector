@@ -49,7 +49,7 @@ class Send
             $result = 1;
         }
 
-        $back = $_SESSION['ref'];
+        $back = $_REQUEST['_ref'];
         if ($result) {
             header("Location:{$back}");
         }

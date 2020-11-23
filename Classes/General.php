@@ -44,7 +44,8 @@ class General
         if ($this->get_partner() == 'neogara') {
             $params = ['location' => $this->location];
             $neogara = new Neogara($params);
-            $neogara->click_reg();
+            $view = $neogara->click_reg($view);
+            die;
         }
 
         if ($this->get_partner() == 'neogara_js') {
@@ -186,7 +187,7 @@ class General
         
         $query = array_diff($array, ['']);
         $http_query = (!empty($query)) ? '?' . http_build_query($query) : null;
-        $link = "https://admin.neogara.com/script/neo_form.js{$http_query}";
+        $link = "https://admin.neogara.com/script/neo_form_js.js{$http_query}";
         $script = "<script src=\"{$link}\"></script>";
 
         return str_replace('</head>', "{$script}\n</head>", $view);
@@ -243,7 +244,7 @@ class General
 
     public function get_location()
     {
-        if (isset($_SESSION['location'])) {
+        if (isset($_SESSION['location']) && !empty($_SESSION['location'])) {
             $this->location = $_SESSION['location'];
             return true;
         }
@@ -260,11 +261,7 @@ class General
 
     public function get_ref()
     {
-        if (!isset($_SESSION['ref'])) {
-            $schema = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
-            $_SESSION['ref'] = $schema;
-            return "{$schema}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        }
-        return $_SESSION['ref'];
+        $schema = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
+        return "{$schema}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
     }
 }
