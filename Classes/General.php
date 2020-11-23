@@ -76,9 +76,11 @@ class General
     {
         $q = '';
         if (isset($_SESSION['error'])) {
+            $q = '<script>document.addEventListener("DOMContentLoaded", function(){';
             foreach ($_SESSION['error'] as $error) {
-                $q .= "<script>alert('{$error}')</script>";
+                $q .= "alert('{$error}');";
             }
+            $q .= '});</script>';
         }
         unset($_SESSION['error']);
         $view = str_replace('</body', $q."\n</body", $view);
