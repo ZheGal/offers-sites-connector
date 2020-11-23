@@ -79,6 +79,7 @@ class Neogara
             'url' => $url,
             'content' => $array
         ]);
+        unset($_SESSION['ref']);
         unset($_SESSION['click_id']);
 
         print_r($request);
@@ -128,8 +129,12 @@ class Neogara
 
     public function get_ref()
     {
-        $scheme = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
-        return "{$scheme}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        if (!isset($_SESSION['ref'])) {
+            $schema = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
+            $_SESSION['ref'] = $schema;
+            return "{$schema}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        }
+        return $_SESSION['ref'];
     }
 
     public function get_ref_lead()

@@ -260,7 +260,11 @@ class General
 
     public function get_ref()
     {
-        $schema = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
-        return "{$schema}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        if (!isset($_SESSION['ref'])) {
+            $schema = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
+            $_SESSION['ref'] = $schema;
+            return "{$schema}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        }
+        return $_SESSION['ref'];
     }
 }
