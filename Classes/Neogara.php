@@ -80,9 +80,6 @@ class Neogara
             'content' => $array
         ]);
         unset($_SESSION['click_id']);
-
-        print_r($_SERVER);
-        die;
         
         if (isset($request['error'])) {
             if (is_array($request['message'])) {
@@ -92,8 +89,8 @@ class Neogara
             } else {
                 $_SESSION['error'][] = "{$request['statusCode']} {$request['error']}: {$request['message']}";
             }
-            $back = $_SESSION['ref'];
-            // header("Location:{$back}");
+            $back = ($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
+            header("Location:{$back}");
         }
 
         if ($request['result'] == 'ok') {
