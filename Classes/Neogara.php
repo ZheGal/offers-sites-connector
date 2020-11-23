@@ -95,9 +95,6 @@ class Neogara
             'url' => $url,
             'content' => $array
         ]);
-
-        print_r($request);
-        die;
         
         if (isset($request['error'])) {
             if (is_array($request['message'])) {
