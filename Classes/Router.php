@@ -10,7 +10,8 @@ class Router
     public function __construct()
     {
         $this->method = strtoupper($_SERVER['REQUEST_METHOD']);
-        $this->path = trim($_SERVER['REQUEST_URI'], '\/ ');
+        $path = explode("?", $_SERVER['REQUEST_URI']);
+        $this->path = trim($path[0], '\/ ');
     }
 
     public function get_routes()

@@ -10,6 +10,8 @@ class GlobalMaxis
         if ($empty) {
             header("Location:{$_POST['_ref']}");
         }
+
+        $this->check_requests();
     }
 
     public function check_empty()
@@ -32,5 +34,10 @@ class GlobalMaxis
         }
 
         return $error;
+    }
+
+    public function check_requests()
+    {
+        print_r($_REQUEST);
     }
 }
