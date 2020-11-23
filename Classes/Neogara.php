@@ -13,6 +13,9 @@ class Neogara
         if (file_exists($settings_path)) {
             $this->settings = json_decode(file_get_contents($settings_path), 1);
         }
+        if (isset($_SESSION['location'])) {
+            $this->location = $_SESSION['location'];
+        }
         if (!empty($params) && is_array($params)) {
             foreach ($params as $key => $value) {
                 $this->$key = $value;
@@ -30,7 +33,7 @@ class Neogara
             'city' => $this->get_user_city(),
             'country' => $this->get_user_country()
         ]);
-        $url = 'https://admin.neogara.com/clicks';
+        $url = 'https://stage.admin.neogara.com/clicks';
         
         $request = $this->send_request([
             'url' => $url,
@@ -54,7 +57,53 @@ class Neogara
 
     public function lead_reg()
     {
-        $url = 'https://admin.neogara.com/register/lid';
+        $array = json_encode([
+            'pid' => $this->get_pid(),
+            'pipeline' => $this->get_pipeline(),
+            'firstname' => $_REQUEST['firstname'],
+            'lastname' => $_REQUEST['lastname'],
+            'phone' => $this->get_phone(),
+            'email' => $this->get_email(),
+            'ref' => $this->get_ref_lead(),
+            'ip' => $this->get_user_ip(),
+            'city' => $this->get_user_city(),
+            'country' => $this->get_user_country(),
+            'click' => $_SESSION['click_id'],
+        ], JSON_PRETTY_PRINT);
+        $url = 'https://stage.admin.neogara.com/register/lid';
+        
+        $request = $this->send_request([
+            'url' => $url,
+            'content' => $array
+        ]);
+        unset($_SESSION['click_id']);
+        
+        if (isset($request['error'])) {
+            if (is_array($request['message'])) {
+                foreach ($request['message'] as $mes) {
+                    $_SESSION['error'][] = "{$request['statusCode']} {$request['error']}: {$mes}";
+                }
+            } else {
+                $_SESSION['error'][] = "{$request['statusCode']} {$request['error']}: {$request['message']}";
+            }
+            $back = $_SESSION['ref'];
+            header("Location:{$back}");
+        }
+
+        if ($request['result'] == 'ok') {
+            $back = "/".$this->settings['return'];
+            header("Location:{$back}");
+        }
+    }
+
+    public function get_phone()
+    {
+        return $_REQUEST['phone_number'];
+    }
+
+    public function get_email()
+    {
+        return $_REQUEST['email'];
     }
 
     public function get_pid()
@@ -76,6 +125,11 @@ class Neogara
     {
         $scheme = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
         return "{$scheme}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+    }
+
+    public function get_ref_lead()
+    {
+        return $_SESSION['ref'];
     }
 
     public function get_user_ip()

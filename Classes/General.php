@@ -40,6 +40,7 @@ class General
         if (!$view) {
             return false;
         }
+        $this->get_ref();
         if ($this->get_partner() == 'neogara') {
             $params = ['location' => $this->location];
             $neogara = new Neogara($params);
@@ -251,8 +252,16 @@ class General
         $raw = file_get_contents($url);
         $json = json_decode($raw, 1);
         if (!empty($raw) && is_array($json)) {
+            $_SESSION['location'] = $json;
             $this->location = $json;
+            return true;
         }
         return false;
+    }
+
+    public function get_ref()
+    {
+        $schema = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
+        $_SESSION['ref'] = "{$schema}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
     }
 }
