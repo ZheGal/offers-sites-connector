@@ -31,8 +31,8 @@ class Actions
 
         if (isset($_GET['partner'])) {
             $gets = $_GET['partner'];
-            if ($get == 'global' || $get == 'neogara' || $get == 'neogara_js') {
-                $action = $get;
+            if ($gets == 'global' or $gets == 'neogara' or $gets == 'neogara_js') {
+                $action = $gets;
             }
         }
         
