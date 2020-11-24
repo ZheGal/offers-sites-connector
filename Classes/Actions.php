@@ -17,22 +17,22 @@ class Actions
     {
         $send = new Send();
         $settings = self::get_settings();
+        
+        foreach ($settings['partner'] as $partner => $value) {
+            $all[] = $partner;
+            if ($value == 1) {
+                $action = $partner;
+            break;
+            }
+        }
+        if (empty($action)) {
+            $action = $all[0];
+        }
 
         if (isset($_GET['partner'])) {
             $gets = $_GET['partner'];
             if ($get == 'global' || $get == 'neogara' || $get == 'neogara_js') {
                 $action = $get;
-            }
-        } else {
-            foreach ($settings['partner'] as $partner => $value) {
-                $all[] = $partner;
-                if ($value == 1) {
-                    $action = $partner;
-                break;
-                }
-            }
-            if (empty($action)) {
-                $action = $all[0];
             }
         }
         
