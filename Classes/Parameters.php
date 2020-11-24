@@ -47,4 +47,43 @@ class Parameters extends General
 
         return $result;
     }
+
+    public function get_phone_code_params()
+    {
+        $result = [];
+        return $result;
+    }
+
+    public function get_pixel_img_pageview_params()
+    {
+        $result = [];
+        if (isset($_GET['facebook'])) {
+            $result['code'] = $_GET['facebook'];
+        } else {
+            $result['code'] = ($this->settings->facebook) ? $this->settings->facebook : false;
+        }
+        return $result;
+    }
+
+    public function get_pixel_img_params()
+    {
+        $result = [];
+        if (isset($_GET['facebook'])) {
+            $result['code'] = $_GET['facebook'];
+        } else {
+            $result['code'] = ($this->settings->facebook) ? $this->settings->facebook : false;
+        }
+        return $result;
+    }
+
+    public function get_pixel_params()
+    {
+        $result = [];
+        if (isset($_GET['facebook'])) {
+            $result['code'] = $_GET['facebook'];
+        } else {
+            $result['code'] = ($this->settings->facebook) ? $this->settings->facebook : false;
+        }
+        return $result;
+    }
 }

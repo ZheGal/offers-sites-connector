@@ -22,10 +22,10 @@ if ($router->covergence()) {
 $site->set('metrika', $templates->get('metrika'));
 $site->set('metrika_thanks', $templates->get('metrika_thanks'));
 $site->set('metrika_targetclick', $templates->get('metrika_targetclick'));
-$site->set('pixel', 'Code Pixel');
-$site->set('pixel_img', 'Code Pixel Img');
-$site->set('pixel_img_pageview', 'Code Pixel Img PageView');
-$site->set('phone_code', 'Phone Code');
+$site->set('pixel', $templates->get('pixel'));
+$site->set('pixel_img', $templates->get('pixel_img'));
+$site->set('pixel_img_pageview', $templates->get('pixel_img_pageview'));
+$site->set('phone_code', $templates->get('phone_code'));
 $site->set('partner_name', $site->get_partner());
 
 // Если пользователь заполнял форму и его редиректнуло на главную, заполнить поля
