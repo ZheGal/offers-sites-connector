@@ -2,13 +2,17 @@
 
 namespace App\Classes;
 
+use App\Classes\Translate;
+
 class Neogara
 {
     private $settings;
     private $location;
+    public $translate;
 
     public function __construct($params = [])
     {
+        $this->translate = new Translate();
         $settings_path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', 'settings.json']);
         if (file_exists($settings_path)) {
             $this->settings = json_decode(file_get_contents($settings_path), 1);

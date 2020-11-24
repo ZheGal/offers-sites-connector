@@ -4,11 +4,15 @@ namespace App\Classes;
 
 use App\Classes\Neogara;
 use App\Classes\GlobalMaxis;
+use App\Classes\Translate;
 
 class Send
 {
+    public $translate;
+
     public function __construct()
     {
+        $this->translate = new Translate();
         $this->check_empty_fields();
         $this->check_phone_code();
     }
@@ -31,27 +35,31 @@ class Send
 
     public function check_empty_fields()
     {
+        $translate = $this->translate;
         $result = false;
         if (empty($_POST['firstname'])) {
-            $_SESSION['error'][] = "First name is empty";
+            $_SESSION['error'][] = $translate->t("First name is empty");
             $result = 1;
         }
         
         if (empty($_POST['lastname'])) {
-            $_SESSION['error'][] = "Last name is empty";
+            $_SESSION['error'][] = $translate->t("Last name is empty");
             $result = 1;
         }
         
         if (empty($_POST['email'])) {
+            $_SESSION['error'][] = $translate->t("Email is empty");
             $result = 1;
         }
         
         if (empty($_POST['phone_number'])) {
+            $_SESSION['error'][] = $translate->t("Phone number is empty");
             $result = 1;
         }
 
         $back = $_REQUEST['_ref'];
         if ($result) {
+            $_SESSION['form_fields'] = $_POST;
             header("Location:{$back}");
         }
     }

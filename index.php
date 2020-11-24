@@ -28,4 +28,9 @@ $site->set('pixel_img_pageview', 'Code Pixel Img PageView');
 $site->set('phone_code', 'Phone Code');
 $site->set('partner_name', $site->get_partner());
 
+// Если пользователь заполнял форму и его редиректнуло на главную, заполнить поля
+if (isset($_SESSION['form_fields'])) {
+    $site->inputs_fill();
+}
+
 $site->run();

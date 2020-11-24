@@ -9,6 +9,7 @@ class General
     public $settings;
     public $variables;
     public $location;
+    public $inputs_fill;
 
     public function __construct()
     {
@@ -34,11 +35,47 @@ class General
         }
     }
 
+    public function inputs_fill()
+    {
+        $this->inputs_fill = 1;
+    }
+
+    public function inputs_fill_action($view = '')
+    {
+        $inputs = [];
+        if (!empty($_SESSION['form_fields'])) {
+            foreach ($_SESSION['form_fields'] as $key => $value) {
+                if ($key[0] != '_') {
+                    $inputs[$key] = $value;
+                }
+            }
+        }
+        $inputs = array_diff($inputs, ['']);
+
+        preg_match_all('/<input.*?name=[\'|"](.*?)[\'|"].*?>/', $view, $forms);
+        if (!empty($forms)) {
+            foreach($forms[0] as $k => $input) {
+                $input_key = $forms[1][$k];
+                if (isset($inputs[$input_key])) {
+                    $add = "value=\"{$inputs[$input_key]}\"";
+                    $input_b = str_replace('>', ' '.$add.'>', $input);
+                    $view = str_replace($input, $input_b, $view);
+                }
+            }
+        }
+        unset($_SESSION['form_fields']);
+        return $view;
+    }
+
     public function run()
     {
         $view = $this->render();
         if (!$view) {
             return false;
+        }
+
+        if ($this->inputs_fill) {
+            $view = $this->inputs_fill_action($view);
         }
         $current = $this->get_ref();
         if ($this->get_partner() == 'neogara') {

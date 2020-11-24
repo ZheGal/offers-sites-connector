@@ -58,11 +58,9 @@ class GlobalMaxis
             $error = 1;
         }
         if (empty($_POST['email'])) {
-            $_SESSION['error'][] = "Email is empty";
             $error = 1;
         }
         if (empty($_POST['phone_number'])) {
-            $_SESSION['error'][] = "Phone number is empty";
             $error = 1;
         }
 
