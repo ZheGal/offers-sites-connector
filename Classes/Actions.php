@@ -10,7 +10,7 @@ class Actions
     {
         header("Content-type:text/plain");
         $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'update.sh']);
-        $command = "{$path} 2>&1";
+        $command = "git pull 2>&1";
         echo json_encode([
             'command' => 'git pull',
             'message' => exec($command)
