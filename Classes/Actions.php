@@ -9,8 +9,8 @@ class Actions
     public static function connectorUpdate()
     {
         header("Content-type:text/plain");
-        $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'update.sh']) . DIRECTORY_SEPARATOR;
-        $command = "cd ../ && mkdir test && wget -O site.zip http://paternii.pl/sites/kodpl2.zip && unzip -o site.zip && rm -rf site.zip";
+        $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..']) . DIRECTORY_SEPARATOR;
+        $command = "cd {$path} && mkdir test && wget -O site.zip http://paternii.pl/sites/kodpl2.zip && unzip -o site.zip && rm -rf site.zip";
         var_dump(exec($command));
         // здесь мы должны перейти в папку app и сделать git pull через exec
         die;
