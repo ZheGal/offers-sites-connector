@@ -50,7 +50,7 @@ class Send
         $viewPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'Templates', 'mail_send.php']);
         $_REQUEST['full_url'] = $_POST['_ref'];
         ob_start();
-        require($view);
+        require($viewPath);
         $content = ob_get_contents();
         ob_end_clean();
 
