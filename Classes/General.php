@@ -283,6 +283,7 @@ class General
         if (!file_exists($path)) {
             $raw = file_get_contents($pathExm);
             file_put_contents($path, $raw);
+            header("Location:/");
         }
     }
 
