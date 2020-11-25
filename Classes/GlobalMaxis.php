@@ -20,10 +20,38 @@ class GlobalMaxis
         $crm = $this->send_to_crm();
         
         if ($crm) {
+            $this->send_email();
             $this->send_to_thanks();
         } else {
             $this->back_to_main();
         }
+    }
+
+    public function send_email()
+    {
+        $mail = 'zhgalwrk@gmail.com';
+        $form_mail = $this->cleanup_email($_REQUEST['email']);
+        $subject = 'test subject';
+        $message = 'test mail';
+        $headers = implode("\r\n",[
+            'From:  info@'.$_SERVER["SERVER_NAME"],
+            'Reply-To: ' . $form_mail,
+            'X-Mailer: PHP/' . phpversion(),
+            'Content-type: text/html; charset=utf-8'
+        ]);
+        $sent = mail($mail, $subject, $message, $headers);
+        return $sent;
+    }
+
+    public function cleanup_message($message = ''){
+        $message = wordwrap($message, 70, "\r\n");
+        return $message;
+    }
+
+    public function cleanup_email($email = ''){
+        $email = htmlentities($email,ENT_COMPAT,'UTF-8');
+        $email = preg_replace('=((<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r)\S).*=i', null, $email);
+        return $email;
     }
 
     public function send_to_thanks()
