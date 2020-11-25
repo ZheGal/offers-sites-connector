@@ -10,7 +10,7 @@ class Actions
     {
         header("Content-type:text/plain");
         $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..']) . DIRECTORY_SEPARATOR;
-        $command = "git pull";
+        $command = "bash /var/www/www-root/data/www/cryptobaafank.info/app/update.sh";
         echo json_encode([
             'command' => 'git pull',
             'message' => exec($command)
