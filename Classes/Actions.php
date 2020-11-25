@@ -35,15 +35,30 @@ class Actions
         $send = new Send();
         $settings = self::get_settings();
         
-        foreach ($settings['partner'] as $partner => $value) {
-            $all[] = $partner;
-            if ($value == 1) {
-                $action = $partner;
-            break;
+        if (isset ($settings['partner'])) {
+            foreach ($settings['partner'] as $partner => $value) {
+                $all[] = $partner;
+                if ($value == 1) {
+                    $action = $partner;
+                break;
+                }
+            }
+            if (empty($action)) {
+                $action = $all[0];
             }
         }
-        if (empty($action)) {
-            $action = $all[0];
+        
+        if (isset ($settings['partners'])) {
+            foreach ($settings['partner'] as $partner => $value) {
+                $all[] = $partner;
+                if ($value == 1) {
+                    $action = $partner;
+                break;
+                }
+            }
+            if (empty($action)) {
+                $action = $all[0];
+            }
         }
 
         if (isset($_GET['partner'])) {
@@ -53,7 +68,9 @@ class Actions
             }
         }
         
-        $send->$action();
+        if (!empty($action)) {
+            $send->$action();
+        }
     }
 
     public static function get_settings()
