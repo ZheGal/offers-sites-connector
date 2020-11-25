@@ -9,8 +9,10 @@ class Actions
     public static function connectorUpdate()
     {
         header("Content-type:text/plain");
+        
         $command = exec('bash update.sh 2>&1');
-        echo $command;
+
+        echo 'command: '. $command;
         die;
     }
 
