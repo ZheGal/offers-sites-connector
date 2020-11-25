@@ -9,7 +9,7 @@ class Actions
     public static function connectorUpdate()
     {
         header("Content-type:text/plain");
-        $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..']);
+        $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..']) . DIRECTORY_SEPARATOR;
         $command = "cd {$path} && git pull";
         echo json_encode([
             'command' => 'git pull',
