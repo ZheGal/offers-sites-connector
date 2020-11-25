@@ -34,7 +34,7 @@ class GlobalMaxis
 
         $mail = 'zhgalwrk@gmail.com';
         $form_mail = $this->cleanup_email($_REQUEST['email']);
-        $subject = 'test subject';
+        $subject = strval($settings['language'].' '.$settings['sitename'].' ' . htmlentities($_SERVER["SERVER_NAME"],ENT_COMPAT,'UTF-8'));
 
         $view = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'Templates', 'mail_send.php']);
         ob_start();
