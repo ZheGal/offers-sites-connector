@@ -25,6 +25,7 @@ class Neogara
                 $this->$key = $value;
             }
         }
+        unset($_SESSION['location']);
     }
 
     public function click_reg($view = '')
@@ -37,8 +38,8 @@ class Neogara
             'city' => $this->get_user_city(),
             'country' => $this->get_user_country()
         ]);
-        // $url = 'https://admin.neogara.com/clicks'; // prod
-        $url = 'https://stage.admin.neogara.com/clicks'; // dev
+        $url = 'https://admin.neogara.com/clicks'; // prod
+        // $url = 'https://stage.admin.neogara.com/clicks'; // dev
         
         $request = $this->send_request([
             'url' => $url,
@@ -92,8 +93,8 @@ class Neogara
             'click' => $this->get_click_id(),
         ]);
 
-        // $url = 'https://admin.neogara.com/register/lid'; // prod
-        $url = 'https://stage.admin.neogara.com/register/lid'; // dev
+        $url = 'https://admin.neogara.com/register/lid'; // prod
+        // $url = 'https://stage.admin.neogara.com/register/lid'; // dev
         
         $request = $this->send_request([
             'url' => $url,
@@ -121,7 +122,7 @@ class Neogara
 
     public function get_click_id()
     {
-        return (isset($_REQUEST['_click'])) ? $_REQUEST['click'] : false;
+        return (isset($_POST['_click'])) ? $_POST['_click'] : false;
     }
 
     public function get_phone()

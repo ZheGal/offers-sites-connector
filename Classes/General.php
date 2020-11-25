@@ -140,32 +140,12 @@ class General
         return $view;
     }
 
-    public function isCloaked()
-    {
-        $settings = $this->settings;
-        if (isset($settings['cloakit']) && !empty($settings['cloakit'])) {
-            return true;
-        }
-        return false;
-    }
-
-    public function cloakitIt()
-    {
-        $app = new \App\Classes\Cloakit($this->settings);
-        return $app->connect();
-    }
-
     public function render()
     {
         $vars = $this->variables;
         $requestAr = explode("?", $_SERVER['REQUEST_URI']);
         $fileName = trim($requestAr[0], '\/ ');
         $fileName = (empty($fileName)) ? 'index.php' : $fileName;
-
-        if ($this->isCloaked() && $fileName == 'index.php') {
-            $cloak = $this->cloakitIt();
-            $fileName = (empty($cloak)) ? $fileName : $cloak;
-        }
 
         $fileNamePath = $this->get_file_path($fileName);
 
