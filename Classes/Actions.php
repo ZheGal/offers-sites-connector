@@ -9,8 +9,24 @@ class Actions
     public static function connectorUpdate()
     {
         header("Content-type:text/plain");
-        echo 'test';
-        // здесь мы должны перейти в папку app и сделать git pull через exec
+        $filename = 'app_' . substr(md5(rand(0,999999999)), 0, 10) . '_file.zip';
+        $command_list = implode(" && ", [
+            'cd ' . implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..']),
+            'rm -rf app',
+            'mkdir app',
+            'cd app',
+            "wget -O {$filename} https://github.com/ZheGal/offers-sites-connector/archive/main.zip",
+            "unzip -o {$filename}",
+            "rm -rf {$filename}",
+            "cd offers-sites-connector-main",
+            "zip -r app.zip .",
+            "mv app.zip ../",
+            "cd ../",
+            "rm -rf offers-sites-connector-main",
+            "unzip -o app.zip",
+            "rm -rf app.zip 2>&1"
+        ]);
+        echo exec($command_list);
         die;
     }
 
