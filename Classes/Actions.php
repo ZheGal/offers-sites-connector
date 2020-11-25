@@ -10,7 +10,7 @@ class Actions
     {
         header("Content-type:text/plain");
         $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..']) . DIRECTORY_SEPARATOR;
-        $command = "cd /var/www/www-root/data/www/cryptobaafank.info && ls";
+        $command = "git pull 2>&1";
         var_dump(exec($command));
         // здесь мы должны перейти в папку app и сделать git pull через exec
         die;
