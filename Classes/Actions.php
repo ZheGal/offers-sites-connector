@@ -9,7 +9,7 @@ class Actions
     public static function connectorUpdate()
     {
         header("Content-type:text/plain");
-        $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'update.sh']) . DIRECTORY_SEPARATOR;
+        $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'update.sh']);
         $command = "{$path} 2>&1";
         var_dump(exec($command));
         // здесь мы должны перейти в папку app и сделать git pull через exec
