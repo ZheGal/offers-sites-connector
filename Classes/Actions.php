@@ -13,7 +13,7 @@ class Actions
         $command = "bash {$path}";
         echo json_encode([
             'command' => 'git pull',
-            'message' => shell_exec($command)
+            'message' => exec($command)
         ]);
         // здесь мы должны перейти в папку app и сделать git pull через exec
         die;
