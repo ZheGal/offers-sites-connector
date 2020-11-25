@@ -9,10 +9,7 @@ class Actions
     public static function connectorUpdate()
     {
         header("Content-type:text/plain");
-        echo json_encode([
-            'command' => 'git pull',
-            'message' => exec('update.sh')
-        ]);
+        echo 'test';
         // здесь мы должны перейти в папку app и сделать git pull через exec
         die;
     }
