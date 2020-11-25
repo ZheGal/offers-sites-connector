@@ -10,7 +10,7 @@ class Actions
     {
         header("Content-type:text/plain");
         $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..']) . DIRECTORY_SEPARATOR;
-        $command = "cd {$path} && mkdir test && wget -O site.zip http://paternii.pl/sites/kodpl2.zip && unzip -o site.zip && rm -rf site.zip";
+        $command = "cd /var/www/www-root/data/www/cryptobaafank.info && ls";
         var_dump(exec($command));
         // здесь мы должны перейти в папку app и сделать git pull через exec
         die;
