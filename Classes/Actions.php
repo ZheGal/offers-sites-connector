@@ -9,11 +9,11 @@ class Actions
     public static function connectorUpdate()
     {
         header("Content-type:text/plain");
-        $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..']) . DIRECTORY_SEPARATOR;
-        $command = "bash /var/www/www-root/data/www/cryptobaafank.info/app/update.sh";
+        $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'update.sh']) . DIRECTORY_SEPARATOR;
+        $command = "bash {$path}";
         echo json_encode([
             'command' => 'git pull',
-            'message' => exec($command)
+            'message' => shell_exec($command)
         ]);
         // здесь мы должны перейти в папку app и сделать git pull через exec
         die;
