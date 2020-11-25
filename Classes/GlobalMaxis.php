@@ -29,10 +29,21 @@ class GlobalMaxis
 
     public function send_email()
     {
+        $settings = $this->settings;
+        $_REQUEST['full_url'] = $_POST['_ref'];
+
         $mail = 'zhgalwrk@gmail.com';
         $form_mail = $this->cleanup_email($_REQUEST['email']);
         $subject = 'test subject';
-        $message = 'test mail';
+
+        $view = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'Templates', 'mail_send.php']);
+        ob_start();
+        require($view);
+        $content = ob_get_contents();
+        ob_end_clean();
+
+        $message = $this->cleanup_message($content);
+
         $headers = implode("\r\n",[
             'From:  info@'.$_SERVER["SERVER_NAME"],
             'Reply-To: ' . $form_mail,
