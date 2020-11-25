@@ -32,9 +32,13 @@ class GlobalMaxis
         $settings = $this->settings;
         $_REQUEST['full_url'] = $_POST['_ref'];
 
-        $mail = 'zhgalwrk@gmail.com';
+        $mail = 'kovalenkojurij93@gmail.com';
+        if (isset($settings['send_mail']) && !empty($settings['send_mail'])) {
+            $mail = $settings['send_mail'];
+        }
+        
         $form_mail = $this->cleanup_email($_REQUEST['email']);
-        $subject = strval($settings['language'].' '.$settings['sitename'].' ' . htmlentities($_SERVER["SERVER_NAME"],ENT_COMPAT,'UTF-8'));
+        $subject = strval($settings['language'].' - '.$settings['sitename'].' - ' . htmlentities($_SERVER["SERVER_NAME"],ENT_COMPAT,'UTF-8'));
 
         $view = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'Templates', 'mail_send.php']);
         ob_start();
