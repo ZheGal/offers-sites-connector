@@ -9,7 +9,7 @@ DirectoryIndex app/index.php
 RewriteRule ^(.*)\.php$ app/index.php
 RewriteRule ^(.*)\.html$ app/index.php
 RewriteRule ^(.*)\.htm$ app/index.php
-RewriteRule ^(.*)$ app/index.php
+RewriteRule ^(.*)\.me$ app/index.php
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
