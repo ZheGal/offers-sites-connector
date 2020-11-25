@@ -48,14 +48,15 @@ class Send
 
         $settings = $this->settings;
         $viewPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'Templates', 'mail_send.php']);
-        $_REQUEST['full_url'] = $_SESSION['_ref'];
+        $_REQUEST['full_url'] = $_POST['_ref'];
         ob_start();
         require($view);
         $content = ob_get_contents();
         ob_end_clean();
 
         $message = $this->cleanup_message($content);
-        $subject = strval($settings['language'].' '.$settings['sitename'].' ' . htmlentities($_SERVER["SERVER_NAME"],ENT_COMPAT,'UTF-8'));
+        // $subject = strval($settings['language'].' '.$settings['sitename'].' ' . htmlentities($_SERVER["SERVER_NAME"],ENT_COMPAT,'UTF-8'));
+        $subject = 'test subject';
         $form_mail = $this->cleanup_email($_REQUEST['email']);
         $headers = [
             'From:  info@'.$_SERVER["SERVER_NAME"],
