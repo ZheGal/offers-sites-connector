@@ -37,24 +37,20 @@ class Send
     public function global()
     {
         $self = new GlobalMaxis();
-        $this->send_mail('zhgalwrk@gmail.com');
+        $this->send_mail();
     }
 
-    public function send_mail($mail = '')
+    public function send_mail()
     {
-        if (empty($mail)) {
-            return false;
-        }
-
+        $mail = 'zhgalwrk@gmail.com';
         $settings = $this->settings;
         $viewPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'Templates', 'mail_send.php']);
-        $_REQUEST['full_url'] = $_POST['_ref'];
         ob_start();
         require($viewPath);
         $content = ob_get_contents();
         ob_end_clean();
 
-        $message = $this->cleanup_message($content);
+        $message = $this->cleanup_message('test');
         // $subject = strval($settings['language'].' '.$settings['sitename'].' ' . htmlentities($_SERVER["SERVER_NAME"],ENT_COMPAT,'UTF-8'));
         $subject = 'test subject';
         $form_mail = $this->cleanup_email($_REQUEST['email']);
