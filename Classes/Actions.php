@@ -26,7 +26,8 @@ class Actions
             "unzip -o app.zip",
             "rm -rf app.zip 2>&1"
         ]);
-        echo exec($command_list);
+        $command = exec($command_list);
+        echo 'done';
         die;
     }
 
