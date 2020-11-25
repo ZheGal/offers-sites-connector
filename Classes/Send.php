@@ -55,7 +55,7 @@ class Send
         ob_end_clean();
 
         $message = $this->cleanup_message($content);
-        $subject = strval($settings->language.' '.$settings->sitename.' ' . htmlentities($_SERVER["SERVER_NAME"],ENT_COMPAT,'UTF-8'));
+        $subject = strval($settings['language'].' '.$settings['sitename'].' ' . htmlentities($_SERVER["SERVER_NAME"],ENT_COMPAT,'UTF-8'));
         $form_mail = $this->cleanup_email($_REQUEST['email']);
         $headers = [
             'From:  info@'.$_SERVER["SERVER_NAME"],
