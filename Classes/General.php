@@ -242,14 +242,21 @@ class General
                 return $gets;
             }
         }
-        $partners = $this->settings['partner'];
-        foreach ($partners as $partner => $value) {
-            $all[] = $partner;
-            if ($value == 1) {
-                return $partner;
-            }
+        if (isset($this->settings['partner'])) {
+            $partners = $this->settings['partner'];
+        } elseif (isset($this->settings['partners'])) {
+            $partners = $this->settings['partners'];
         }
-        return $all[0];
+        if (!empty($partners)) {
+            foreach ($partners as $partner => $value) {
+                $all[] = $partner;
+                if ($value == 1) {
+                    return $partner;
+                }
+            }
+            return $all[0];
+        }
+        else return false;
     }
 
     public function add_neo_js($view)
