@@ -10,7 +10,7 @@ class Actions
     {
         header("Content-type:text/plain");
         $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..']) . DIRECTORY_SEPARATOR;
-        $command = "cd {$path} && git pull";
+        $command = "ls";
         echo json_encode([
             'command' => 'git pull',
             'message' => exec($command)
