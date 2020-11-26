@@ -73,6 +73,7 @@ class Send
     public function check_phone_code()
     {
         $loc = ($_SESSION['location']['country']) ? $_SESSION['location']['country'] : false;
+
         if (isset($_POST['phone_code'])) {
             $code = $_POST['phone_code'];
         } else {
