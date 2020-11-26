@@ -23,7 +23,8 @@ class SelfUpdate
         if (rename($new, $app)) {
             echo 'Success';
         } else {
-            echo 'Cannot rename new folder to app';
+            echo exec("mv {$new} {$app}");
+            echo 'Trying to rename new folder. Update page to check';
         }
     }
 
