@@ -10,10 +10,12 @@ class SelfUpdate
     public function __construct()
     {
         header("Content-type:text/plain;charset=utf-8");
-        $filename = $this->downloadFunctions(); // скачать функции 
-        $unpack = $this->unpackArchive($filename); // распаковать архив
-        $delete = $this->deleteIsset(); // удалить содержимое папки app
-        $move = $this->moveFromIsset();
+        $filename = $this->downloadFunctions(); // скачать функции
+        if (file_exists($filename['path'])) {
+            $unpack = $this->unpackArchive($filename); // распаковать архив
+            $delete = $this->deleteIsset(); // удалить содержимое папки app
+            $move = $this->moveFromIsset();
+        }
     }
     
     public function moveFromIsset()
