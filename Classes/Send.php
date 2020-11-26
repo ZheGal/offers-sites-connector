@@ -74,15 +74,35 @@ class Send
     {
         if (isset($_POST['phone_code'])) {
             $code = $_POST['phone_code'];
-            $phone = $_POST['phone_number'];
-
-            if ($code != $phone) {
-                unset($_POST['phone_code']);
-                unset($_REQUEST['phone_code']);
-
-                $_POST['phone_number'] = $code.$phone;
-                $_REQUEST['phone_number'] = $code.$phone;
-            }
+        } else {
+            $code = $this->get_code_by_country();
         }
+
+        if (empty($code)) {
+            return false;
+        }
+
+        $phone = $_POST['phone_number'];
+        if ($code != $phone) {
+            unset($_POST['phone_code']);
+            unset($_REQUEST['phone_code']);
+
+            $_POST['phone_number'] = $code.$phone;
+            $_REQUEST['phone_number'] = $code.$phone;
+        }
+    }
+
+    public function get_code_by_country($code = '')
+    {
+        if (empty($code)) {
+            return false;
+        }
+
+        $array = [
+            'PL' => '+48',
+            'RU' => '+7',
+            'UA' => '+380',
+        ];
+        return $array[$code];
     }
 }
