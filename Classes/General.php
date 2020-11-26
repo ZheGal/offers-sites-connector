@@ -93,6 +93,7 @@ class General
         $view = $this->check_utm($view);
         $view = $this->check_errors($view);
 
+        unset($_SESSION);
         echo $view;
     }
 
