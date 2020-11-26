@@ -8,30 +8,7 @@ class Actions
 {
     public static function connectorUpdate()
     {
-        header("Content-type:text/plain");
-        $temp = 'temp_' . substr(md5(rand(0,999999999)), 0, 10) . '_file.sh';
-        $temp = implode(DIRECTORY_SEPARATOR, [__DIR__, $temp]);
-        $filename = 'app_' . substr(md5(rand(0,999999999)), 0, 10) . '_file.zip';
-        $command_list = implode(" && ", [
-            'cd ' . implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..']),
-            'rm -rf app',
-            'mkdir app',
-            'cd app',
-            "wget -O {$filename} https://github.com/ZheGal/offers-sites-connector/archive/main.zip",
-            "unzip -o {$filename}",
-            "rm -rf {$filename}",
-            "cd offers-sites-connector-main",
-            "zip -r app.zip .",
-            "mv app.zip ../",
-            "cd ../",
-            "rm -rf offers-sites-connector-main",
-            "unzip -o app.zip",
-            "rm -rf app.zip 2>&1"
-        ]);
-        
-        $command = exec($command_list . ' 2>&1');
-        echo $command;
-        die;
+        return new \App\Classes\SelfUpdate();
     }
 
     public static function sendForm()
