@@ -23,7 +23,8 @@ return [
             "Quantum Systems" => "Quantum Systems",
             "Ad Code" => "Ad Code - EN",
 			"Bitcoin Pro" => "Bitcoin Pro PL",
-			"Crypto Bank" => "Криптобанк PL"
+            "Crypto Bank" => "Криптобанк PL",
+            "Maximizer 2" => "Maximizer 2"
         ]
     ]
 ];
