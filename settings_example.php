@@ -6,7 +6,7 @@ return [
     'return' => 'thanks.php',
     'yandex' => '',
     'facebook' => '',
-    'partners' => [
+    'partner' => [
         'neogara' => 0,
         'global' => 1,
         'neogara_js' => 0
