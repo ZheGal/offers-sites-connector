@@ -85,7 +85,7 @@ class Send
         }
 
         $phone = $_POST['phone_number'];
-        
+
         $check = explode($code, $phone);
         if (isset($check[1]) && $check[0] == '') {
             $phone = $check[1];
@@ -98,8 +98,6 @@ class Send
             $_POST['phone_number'] = $code.$phone;
             $_REQUEST['phone_number'] = $code.$phone;
         }
-        print_r($_REQUEST);
-        die;
     }
 
     public function get_code_by_country($code = '')
