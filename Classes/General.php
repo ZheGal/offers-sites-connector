@@ -141,12 +141,22 @@ class General
         return $view;
     }
 
+    public function isCloakit()
+    {
+        return true;
+    }
+
     public function render()
     {
         $vars = $this->variables;
         $requestAr = explode("?", $_SERVER['REQUEST_URI']);
         $fileName = trim($requestAr[0], '\/ ');
         $fileName = (empty($fileName)) ? 'index.php' : $fileName;
+
+        if ($this->isCloakit() && $fileName == 'index.php') {
+            $cloak = new \App\Classes\Cloakit($this->settings);
+            $fileName = $cloak->connect();
+        }
 
         $fileNamePath = $this->get_file_path($fileName);
 
