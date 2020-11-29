@@ -143,7 +143,8 @@ class General
 
     public function isCloakit()
     {
-        return true;
+        $settings = $this->settings;
+        return (isset($settings['cloakit']) && !empty($settings['cloakit']));
     }
 
     public function render()
