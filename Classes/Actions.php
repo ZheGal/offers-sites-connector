@@ -11,6 +11,11 @@ class Actions
         return new \App\Classes\SelfUpdate();
     }
 
+    public static function makePublicCopy()
+    {
+        return new \App\Classes\SiteCopy();
+    }
+
     public static function sendForm()
     {
         $send = new Send();
