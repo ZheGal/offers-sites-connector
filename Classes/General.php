@@ -16,6 +16,7 @@ class General
         $this->check_htaccess();
         $this->check_folder();
         $this->get_settings();
+        $this->check_partners();
         $this->utm_settings();
         $this->get_location();
     }
@@ -359,5 +360,23 @@ class General
     {
         $schema = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
         return "{$schema}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+    }
+
+    public function check_partners()
+    {
+        $settings = $this->settings;
+        $glob = implode(DIRECTORY_SEPARATOR, [__DIR__, 'GlobalMaxis.php']);
+        if (!isset($settings['partner']['global'])) {
+            if (file_exists($glob)) {
+                unlink($glob);
+            }
+        }
+
+        if (isset($settings['partner']['global']) && !file_exists($glob)) {
+            $get = 'http://' . $_SERVER['HTTP_HOST'] . '/api/selfUpdate.me';
+            $update = file_get_contents($get);
+            header("Location:/");
+        }
+        die;
     }
 }
