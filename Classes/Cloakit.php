@@ -24,7 +24,7 @@ class Cloakit
         $data = array(
             '_server' => json_encode($_SERVER),
             'user' => 'dbb8f9158c69d5301355f9689dbae151',
-            'company' => $id
+            'company' => $this->id
         );
         $ch = curl_init();
         $optArray = array(

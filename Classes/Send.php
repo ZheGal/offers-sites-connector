@@ -85,6 +85,12 @@ class Send
         }
 
         $phone = $_POST['phone_number'];
+
+        $check = explode($code, $phone);
+        if (isset($check[1]) && $check[0] == '') {
+            $phone = $check[1];
+        }
+        
         if ($code != $phone) {
             unset($_POST['phone_code']);
             unset($_REQUEST['phone_code']);
