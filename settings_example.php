@@ -7,6 +7,7 @@ return [
     'facebook' => '',
     'partner' => [
         'neogara' => 1,
+        'global' => 0,
         'neogara_js' => 0
     ],
     'language' => '',
