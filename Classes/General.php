@@ -377,6 +377,5 @@ class General
             $update = file_get_contents($get);
             header("Location:/");
         }
-        die;
     }
 }
