@@ -16,6 +16,11 @@ class Actions
         return new \App\Classes\SiteCopy();
     }
 
+    public static function backupSite()
+    {
+        return new \App\Classes\BackupSite();
+    }
+
     public static function sendForm()
     {
         $send = new Send();

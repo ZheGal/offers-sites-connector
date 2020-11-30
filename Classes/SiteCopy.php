@@ -14,14 +14,14 @@ class SiteCopy
         $this->backup_dir();
         $this->create_archive();
 
-        echo "http://{$_SERVER['HTTP_HOST']}/backup/app.zip";
+        echo "http://{$_SERVER['HTTP_HOST']}/backup/public.zip";
     }
 
     public function create_archive()
     {
         $commands = implode(" && ", [
             "cd {$this->publicDir}",
-            "zip -r ../backup/app.zip ."
+            "zip -r ../backup/public.zip ."
         ]);
         return exec($commands);
     }
