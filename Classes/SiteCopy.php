@@ -15,7 +15,7 @@ class SiteCopy
         $this->create_archive();
 
         $result = "https://{$_SERVER['HTTP_HOST']}/backup/public.zip";
-        header("Location:/{$result}");
+        header("Location: {$result}");
     }
 
     public function create_archive()
