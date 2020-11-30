@@ -1,7 +1,7 @@
 <?php
 return [
-    'group' => '0',
-    'pid' => 'tyr7dc',
+    'group' => '122',
+    'pid' => 'lz9mjv',
     'return' => 'thanks.php',
     'yandex' => '',
     'facebook' => '',
