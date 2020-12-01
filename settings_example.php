@@ -1,6 +1,6 @@
 <?php
 return [
-    'group' => '122',
+    'group' => '21',
     'pid' => 'lz9mjv',
     'return' => 'thanks.php',
     'yandex' => '',
