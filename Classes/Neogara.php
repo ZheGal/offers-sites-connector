@@ -115,6 +115,10 @@ class Neogara
 
         if ($request['result'] == 'ok') {
             $back = "/".$this->settings['return'];
+            $request = explode("?", $_SERVER['REQUEST_URI']);
+            if (isset($request[1])) {
+                $back = "{$back}?{$request[1]}";
+            }
             unset($_SESSION);
             header("Location:{$back}");
         }
