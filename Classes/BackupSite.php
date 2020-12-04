@@ -19,7 +19,9 @@ class BackupSite
     public function delete_remoted_archive()
     {
         $link = explode("/", $this->fromLink);
-        echo end($link);
+        $link = end($link);
+        $get = "https://{$this->from}/api/deleteBackup.me?file={$link}";
+        return file_get_contents($get);
     }
 
     public function check_get()
