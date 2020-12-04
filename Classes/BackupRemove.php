@@ -2,7 +2,7 @@
 
 namespace App\Classes;
 
-class BackupSite
+class BackupRemove
 {
     public function __construct()
     {
