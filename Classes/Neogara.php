@@ -188,6 +188,7 @@ class Neogara
         curl_setopt($ch, CURLOPT_URL, $data['url']);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data['content']);
 
         $headers = array();
