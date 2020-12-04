@@ -10,11 +10,12 @@ class SiteCopy
 
         $this->publicDir = $this->dirs(__DIR__, '..', '..', 'public');
         $this->backupDir = $this->dirs(__DIR__, '..', '..', 'backup');
+        $this->publicName = $this->get_public_rand_name();
 
         $this->backup_dir();
         $this->create_archive();
 
-        $result = "https://{$_SERVER['HTTP_HOST']}/backup/public.zip";
+        $result = "https://{$_SERVER['HTTP_HOST']}/backup/{$this->publicName}.zip";
         echo $result;
     }
 
@@ -22,9 +23,15 @@ class SiteCopy
     {
         $commands = implode(" && ", [
             "cd {$this->publicDir}",
-            "zip -r ../backup/public.zip ."
+            "zip -r ../backup/{$this->publicName}.zip ."
         ]);
         return exec($commands);
+    }
+
+    public function get_public_rand_name()
+    {
+        $filename = 'backup_' . substr(md5(rand(0,999999999)), 0, 10) . '_file';
+        return $filename;
     }
 
     public function backup_dir()
