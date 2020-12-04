@@ -39,7 +39,6 @@ class Neogara
             'country' => $this->get_user_country()
         ]);
         $url = 'https://admin.neogara.com/clicks'; // prod
-        // $url = 'https://stage.admin.neogara.com/clicks'; // dev
         
         $request = $this->send_request([
             'url' => $url,
@@ -54,13 +53,12 @@ class Neogara
             } else {
                 $_SESSION['error'][] = "{$request['statusCode']} {$request['error']}: {$request['message']}";
             }
-            return $view;
         }
 
-        $inputs = [
+        $inputs = array_diff([
             'ref' => $this->get_ref(),
-            'click' => $request['id']
-        ];
+            'click' => (isset($request['id'])) ? $request['id'] : false
+        ], ['']);
 
         $input_str = '';
         foreach ($inputs as $key => $value) {
@@ -94,7 +92,6 @@ class Neogara
         ]);
 
         $url = 'https://admin.neogara.com/register/lid'; // prod
-        // $url = 'https://stage.admin.neogara.com/register/lid'; // dev
         
         $request = $this->send_request([
             'url' => $url,
