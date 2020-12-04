@@ -6,10 +6,12 @@ class BackupRemove
 {
     public function __construct()
     {
-        $this->get_filename();
-        $path = $this->backup_path();
-        if ($path) {
-            $this->remove_path();
+        $file = $this->get_filename();
+        if ($file) {
+            $path = $this->backup_path();
+            if ($path) {
+                $this->remove_path();
+            }
         }
     }
 
@@ -23,7 +25,9 @@ class BackupRemove
     {
         if (isset($_GET['file'])) {
             $this->filename = $_GET['file'];
+            return true;
         }
+        return false;
     }
 
     public function backup_path()
