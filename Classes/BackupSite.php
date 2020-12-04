@@ -13,6 +13,13 @@ class BackupSite
         $this->check_get();
         $this->fromLink = $this->from_link();
         $this->download_unpack();
+        $this->delete_remoted_archive();
+    }
+
+    public function delete_remoted_archive()
+    {
+        $link = explode("/", $this->fromLink);
+        echo end($link);
     }
 
     public function check_get()
