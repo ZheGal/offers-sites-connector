@@ -101,17 +101,6 @@ class General
 
     public function add_utm_to_links($view)
     {
-        $base = [];
-        $html = new \DOMDocument();
-        @$html->loadHTML($view);
-        $links = $html->getElementsByTagName('a');
-        if (!$links) {
-            return $view;
-        }
-        foreach ($links as $link) {
-            $base[] = $link->getAttribute('href');
-        }
-
         $getstr = '';
         if (!empty($_GET)) {
             $getstr = http_build_query($_GET);
@@ -119,25 +108,6 @@ class General
         $getstr = (!empty($getstr)) ? "?{$getstr}" : false;
         $view = str_replace('<a href="/"', '<a href="/'.$getstr.'"', $view);
         $view = str_replace('<a href=\'/\'', '<a href=\'/'.$getstr.'\'', $view);
-
-        if (!empty($base)) {
-            foreach ($base as $lnk) {
-                if ($lnk != '/') {
-                    $re = "/<a.+({$lnk}).+>/m";
-                    preg_match_all($re, $view, $matches, PREG_SET_ORDER, 0);
-    
-                    $matches[0][2] = $matches[0][1].$getstr;
-                    foreach ($matches as $match) {
-                        $from = $match[0];
-                        $check = explode('http', $match[1]);
-                        if ($check[0] != '' && !isset($check[1])) {
-                            $to = str_replace($match[1], $match[2], $from);
-                            $view = str_replace($from, $to, $view);
-                        }
-                    }
-                }
-            }
-        }
 
         return $view;
     }
