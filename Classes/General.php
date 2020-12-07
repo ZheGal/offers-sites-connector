@@ -117,11 +117,14 @@ class General
             $getstr = http_build_query($_GET);
         }
         $getstr = (!empty($getstr)) ? "?{$getstr}" : false;
+        $view = str_replace('<a href="/"', '<a href="/'.$getstr.'"', $view);
+        $view = str_replace('<a href=\'/\'', '<a href=\'/'.$getstr.'\'', $view);
 
         if (!empty($base)) {
             foreach ($base as $lnk) {
                 $re = '/<a.+('.$lnk.').+>/m';
                 preg_match_all($re, $view, $matches, PREG_SET_ORDER, 0);
+
                 $matches[0][2] = $matches[0][1].$getstr;
                 foreach ($matches as $match) {
                     $from = $match[0];
