@@ -122,16 +122,18 @@ class General
 
         if (!empty($base)) {
             foreach ($base as $lnk) {
-                $re = '/<a.+('.$lnk.').+>/m';
-                preg_match_all($re, $view, $matches, PREG_SET_ORDER, 0);
-
-                $matches[0][2] = $matches[0][1].$getstr;
-                foreach ($matches as $match) {
-                    $from = $match[0];
-                    $check = explode('http', $match[1]);
-                    if ($check[0] != '' && !isset($check[1])) {
-                        $to = str_replace($match[1], $match[2], $from);
-                        $view = str_replace($from, $to, $view);
+                if ($lnk != '/') {
+                    $re = "/<a.+({$lnk}).+>/m";
+                    preg_match_all($re, $view, $matches, PREG_SET_ORDER, 0);
+    
+                    $matches[0][2] = $matches[0][1].$getstr;
+                    foreach ($matches as $match) {
+                        $from = $match[0];
+                        $check = explode('http', $match[1]);
+                        if ($check[0] != '' && !isset($check[1])) {
+                            $to = str_replace($match[1], $match[2], $from);
+                            $view = str_replace($from, $to, $view);
+                        }
                     }
                 }
             }
