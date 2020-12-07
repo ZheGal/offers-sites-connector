@@ -26,6 +26,11 @@ class Actions
         return new \App\Classes\BackupSite();
     }
 
+    public static function updateSettings()
+    {
+        echo 'none';
+    }
+
     public static function sendForm()
     {
         $send = new Send();

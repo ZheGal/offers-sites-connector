@@ -94,7 +94,44 @@ class General
         $view = $this->check_errors($view);
 
         unset($_SESSION);
+
+        $view = $this->add_utm_to_links($view);
         echo $view;
+    }
+
+    public function add_utm_to_links($view)
+    {
+        $base = [];
+        $html = new \DOMDocument();
+        @$html->loadHTML($view);
+        $links = $html->getElementsByTagName('a');
+        if (!$links) {
+            return $view;
+        }
+        foreach ($links as $link) {
+            $base[] = $link->getAttribute('href');
+        }
+
+        $getstr = '';
+        if (!empty($_GET)) {
+            $getstr = http_build_query($_GET);
+        }
+        $getstr = (!empty($getstr)) ? "?{$getstr}" : false;
+
+        if (!empty($base)) {
+            foreach ($base as $lnk) {
+                $re = '/<a.+('.$lnk.').+>/m';
+                preg_match_all($re, $view, $matches, PREG_SET_ORDER, 0);
+                $matches[0][2] = $matches[0][1].$getstr;
+                foreach ($matches as $match) {
+                    $from = $match[0];
+                    $to = str_replace($match[1], $match[2], $from);
+                    $view = str_replace($from, $to, $view);
+                }
+            }
+        }
+
+        return $view;
     }
 
     public function get_ref_field($view)
@@ -161,6 +198,7 @@ class General
 
         $fileNamePath = $this->get_file_path($fileName);
 
+        // print_r($fileNamePath);
         if ($fileNamePath) {
             extract($vars);
             ob_start();
