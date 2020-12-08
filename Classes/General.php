@@ -390,4 +390,10 @@ class General
         }
         return '#';
     }
+
+    public function get_metrika_code()
+    {
+        $settings = $this->settings;
+        return $settings['yandex'];
+    }
 }
