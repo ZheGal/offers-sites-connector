@@ -379,9 +379,14 @@ class General
 
     public function get_relink()
     {
+        $utm = $_GET;
+        $str = '';
+        if (!empty($utm)) {
+            $str = '?'.http_build_query($utm);
+        }
         $settings = $this->settings;
         if (isset($settings['relink'])) {
-            return $settings['relink'];
+            return $settings['relink'].$str;
         }
         return '#';
     }
