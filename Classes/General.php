@@ -376,4 +376,13 @@ class General
         $schema = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
         return "{$schema}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
     }
+
+    public function get_relink()
+    {
+        $settings = $this->settings;
+        if (isset($settings['relink'])) {
+            return $settings['relink'];
+        }
+        return '#';
+    }
 }

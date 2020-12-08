@@ -27,6 +27,7 @@ $site->set('pixel_img', $templates->get('pixel_img'));
 $site->set('pixel_img_pageview', $templates->get('pixel_img_pageview'));
 $site->set('phone_code', $templates->get('phone_code'));
 $site->set('partner_name', $site->get_partner());
+$site->set('prokl_link', $site->get_relink());
 
 // Если пользователь заполнял форму и его редиректнуло на главную, заполнить поля
 if (isset($_SESSION['form_fields'])) {
