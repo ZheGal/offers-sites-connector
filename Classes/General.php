@@ -143,6 +143,10 @@ class General
 
     public function check_errors($view)
     {
+        if (!$this->have_forms($view)) {
+            return $view;
+        }
+
         $q = '';
         if (isset($_SESSION['error'])) {
             $q = '<script>document.addEventListener("DOMContentLoaded", function(){';
@@ -154,6 +158,15 @@ class General
         unset($_SESSION['error']);
         $view = str_replace('</body', $q."\n</body", $view);
         return $view;
+    }
+
+    public function have_forms($view)
+    {
+        $form = explode("<form", $view);
+        if (count($form) > 1) {
+            return true;
+        }
+        return false;
     }
 
     public function isCloakit()
