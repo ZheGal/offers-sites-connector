@@ -13,6 +13,15 @@ class Cloakit
         $this->id = $settings['cloakit'];
     }
 
+    public function check_file_name($path)
+    {
+        $check = explode($_SERVER['HTTP_HOST']);
+        if (isset($check[1])) {
+            return trim(strval(end($check)), '\/ ');
+        }
+        return $path;
+    }
+
     public function connect()
     {
         $mainserver = 'https://panel.cloakit.space/';
@@ -55,14 +64,14 @@ class Cloakit
           }
           
           if ($responses['mode']=='load') {
-            return $responses['page'];
+            return $this->check_file_name($responses['page']);
           }
           else if ($responses['mode']=='redirect') {
             if ($responses['type']=='blackpage') {
-                return $responses['page'];
+                return $this->check_file_name($responses['page']);
             }
             else {
-                return $responses['page'];
+                return $this->check_file_name($responses['page']);
             }
           }
         return false;
