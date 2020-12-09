@@ -31,6 +31,18 @@ class Actions
         echo 'none';
     }
 
+    public static function linkToMetrikaStats()
+    {
+        $settings = self::get_settings();
+        if (isset($settings['yandex']) && $settings['yandex'] != '') {
+            $url = 'https://metrika.yandex.ru/dashboard?group=dekaminute&period=today&id=' . $settings['yandex'];
+            header("Location:{$url}");
+        } else {
+            header("Content-type:text/plain");
+            echo 'Metrika parameter is empty';
+        }
+    }
+
     public static function sendForm()
     {
         $send = new Send();

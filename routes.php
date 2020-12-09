@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'metrika/stats' => ['GET', 'Actions@LinkToMetrikaStats'],
     'api/selfUpdate.me' => ['GET', 'Actions@ConnectorUpdate'],
     'api/copySite.me' => ['GET', 'Actions@MakePublicCopy'],
     'api/backupSite.me' => ['GET', 'Actions@BackupSite'],
