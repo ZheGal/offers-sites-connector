@@ -96,7 +96,26 @@ class General
         unset($_SESSION);
 
         $view = $this->add_utm_to_links($view);
+        $view = $this->add_after_submit_script($view);
         echo $view;
+    }
+
+    public function add_after_submit_script($view)
+    {
+        $check = explode("<form", $view);
+        if (!isset($check[1])) {
+            return $view;
+        }
+
+        $file = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'Templates', 'after_submit.php']);
+        if (file_exists($file)) {
+            ob_start();
+            require_once($file);
+            $content = ob_get_contents();
+            ob_end_clean();
+            $view = str_replace("</body", $content."\n"."</body", $view);
+        }
+        return $view;
     }
 
     public function add_utm_to_links($view)
