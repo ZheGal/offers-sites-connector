@@ -47,6 +47,10 @@ class Actions
     {
         $send = new Send();
         $settings = self::get_settings();
+
+        if (isset ($settings['partners']) && !isset($settings['partner'])) {
+            $settings['partner'] = $settings['partners'];
+        }
         
         if (isset ($settings['partner'])) {
             foreach ($settings['partner'] as $partner => $value) {
