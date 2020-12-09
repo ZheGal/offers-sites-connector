@@ -15,7 +15,7 @@ class Cloakit
 
     public function check_file_name($path)
     {
-        $check = explode($_SERVER['HTTP_HOST']);
+        $check = explode($_SERVER['HTTP_HOST'], $path);
         if (isset($check[1])) {
             return trim(strval(end($check)), '\/ ');
         }
