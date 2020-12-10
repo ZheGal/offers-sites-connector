@@ -95,6 +95,29 @@ class Actions
         $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', 'settings.json']);
         $raw = file_get_contents($path);
         $json = json_decode($raw, 1);
+        $json = $this->utm_settings($json);
+        return $json;
+    }
+    
+
+    public function utm_settings($json)
+    {
+        $get = $_GET;
+        if (empty($get)) {
+            return false;
+        }
+
+        if (isset($get['pxl'])) {
+            $get['facebook'] = $get['pxl'];
+        }
+
+        if (isset($get['ynd'])) {
+            $get['yandex'] = $get['ynd'];
+        }
+
+        foreach ($get as $key => $value) {
+            $json[$key] = $value;
+        }
         return $json;
     }
 }
