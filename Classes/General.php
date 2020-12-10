@@ -15,8 +15,8 @@ class General
     {
         $this->check_htaccess();
         $this->check_folder();
-        $this->get_settings();
         $this->check_last_symb();
+        $this->get_settings();
         $this->utm_settings();
         $this->get_location();
     }

@@ -16,6 +16,7 @@ class GlobalMaxis
 
         $this->check_requests();
         $this->get_settings();
+        $this->utm_settings();
         $this->get_params();
         $crm = $this->send_to_crm();
         
@@ -218,5 +219,25 @@ class GlobalMaxis
             return true;
         }
         return false;
+    }
+
+    public function utm_settings()
+    {
+        $get = $_GET;
+        if (empty($get)) {
+            return false;
+        }
+
+        if (isset($get['pxl'])) {
+            $get['facebook'] = $get['pxl'];
+        }
+
+        if (isset($get['ynd'])) {
+            $get['yandex'] = $get['ynd'];
+        }
+
+        foreach ($get as $key => $value) {
+            $this->settings[$key] = $value;
+        }
     }
 }

@@ -17,6 +17,7 @@ class Neogara
         if (file_exists($settings_path)) {
             $this->settings = json_decode(file_get_contents($settings_path), 1);
         }
+        $this->utm_settings();
         if (isset($_SESSION['location'])) {
             $this->location = $_SESSION['location'];
         }
@@ -207,5 +208,25 @@ class Neogara
             return $array;
         }
         return $result;
+    }
+
+    public function utm_settings()
+    {
+        $get = $_GET;
+        if (empty($get)) {
+            return false;
+        }
+
+        if (isset($get['pxl'])) {
+            $get['facebook'] = $get['pxl'];
+        }
+
+        if (isset($get['ynd'])) {
+            $get['yandex'] = $get['ynd'];
+        }
+
+        foreach ($get as $key => $value) {
+            $this->settings[$key] = $value;
+        }
     }
 }
