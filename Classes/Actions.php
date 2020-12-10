@@ -52,7 +52,7 @@ class Actions
             $settings['partner'] = $settings['partners'];
         }
         
-        if (isset ($settings['partner'])) {
+        if (isset ($settings['partner']) && is_array($settings['partner'])) {
             foreach ($settings['partner'] as $partner => $value) {
                 $all[] = $partner;
                 if ($value == 1) {
@@ -65,8 +65,8 @@ class Actions
             }
         }
         
-        if (isset ($settings['partners'])) {
-            foreach ($settings['partner'] as $partner => $value) {
+        if (isset ($settings['partners']) && is_array($settings['partners'])) {
+            foreach ($settings['partners'] as $partner => $value) {
                 $all[] = $partner;
                 if ($value == 1) {
                     $action = $partner;
@@ -95,12 +95,12 @@ class Actions
         $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', 'settings.json']);
         $raw = file_get_contents($path);
         $json = json_decode($raw, 1);
-        $json = $this->utm_settings($json);
+        $json = self::utm_settings($json);
         return $json;
     }
     
 
-    public function utm_settings($json)
+    public static function utm_settings($json)
     {
         $get = $_GET;
         if (empty($get)) {
