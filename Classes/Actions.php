@@ -47,7 +47,7 @@ class Actions
     {
         $settings = self::get_settings();
         if (isset($settings['cloakit']) && $settings['cloakit'] != '') {
-            $url = 'https://panel.cloakit.space/campaign/' . $settings['yandex'];
+            $url = 'https://panel.cloakit.space/campaign/' . $settings['cloakit'];
             header("Location:{$url}");
         } else {
             header("Content-type:text/plain");
