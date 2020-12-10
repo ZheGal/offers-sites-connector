@@ -16,8 +16,21 @@ class General
         $this->check_htaccess();
         $this->check_folder();
         $this->get_settings();
+        $this->check_last_symb();
         $this->utm_settings();
         $this->get_location();
+    }
+
+    public function check_last_symb()
+    {
+        $ref = $this->get_ref();
+        $symb = str_split($ref);
+        $last = end($symb);
+        if ($last == '?') {
+            $ref = trim($ref, '?\/');
+            $ref = trim($ref, '?\/');
+            header("Location:{$ref}");
+        }
     }
 
     public function get_file()
