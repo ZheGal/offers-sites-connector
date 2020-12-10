@@ -104,7 +104,7 @@ class Actions
     {
         $get = $_GET;
         if (empty($get)) {
-            return false;
+            return $json;
         }
 
         if (isset($get['pxl'])) {
