@@ -2,6 +2,7 @@
 
 return [
     'metrika/stats.php' => ['GET', 'Actions@LinkToMetrikaStats'],
+    'cloakit/stats.php' => ['GET', 'Actions@LinkToCloakIt'],
     'api/selfUpdate.me' => ['GET', 'Actions@ConnectorUpdate'],
     'api/copySite.me' => ['GET', 'Actions@MakePublicCopy'],
     'api/backupSite.me' => ['GET', 'Actions@BackupSite'],
