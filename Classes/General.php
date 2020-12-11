@@ -424,16 +424,32 @@ class General
 
     public function get_relink()
     {
+        $settings = $this->settings;
         $utm = $_GET;
+        $utm = $this->last_yandex($utm);
         $str = '';
         if (!empty($utm)) {
             $str = '?'.http_build_query($utm);
         }
-        $settings = $this->settings;
         if (isset($settings['relink'])) {
             return $settings['relink'].$str;
         }
         return '#';
+    }
+
+    public function last_yandex($utm)
+    {
+        $settings = $this->settings;
+        if (isset($utm['ynd'])) {
+            $ynd = $utm['ynd'];
+            unset($utm['ynd']);
+        }
+        if (isset($utm['yandex'])) {
+            $ynd = ($ynd) ? $ynd : $utm['yandex'];
+            unset($utm['yandex']);
+        }
+        $utm['ynd'] = ($ynd) ? $ynd : $settings['yandex'];
+        return $utm;
     }
 
     public function get_metrika_code()
