@@ -31,6 +31,11 @@ class Neogara
 
     public function click_reg($view = '')
     {
+        $find = preg_match_all("(<form[^<>]+>)", $view, $out);
+        if (isset($out[0]) && empty($out[0])) {
+            return $view;
+        }
+        
         $array = json_encode([
             'pid' => $this->get_pid(),
             'pipeline' => $this->get_pipeline(),
@@ -69,6 +74,7 @@ class Neogara
         $find = preg_match_all("(<form[^<>]+>)", $view, $out);
         
         if (isset($out[0])) {
+            $out[0] = array_unique($out[0]);
             foreach ($out[0] as $form) {
                 $view = str_replace($form, "{$form}\n{$input_str}", $view);
             }

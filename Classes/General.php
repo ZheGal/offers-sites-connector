@@ -151,6 +151,7 @@ class General
         $find = preg_match_all("(<form[^<>]+>)", $view, $out);
         
         if (isset($out[0])) {
+            $out[0] = array_unique($out[0]);
             foreach ($out[0] as $form) {
                 $view = str_replace($form, "{$form}\n{$input_str}", $view);
             }
