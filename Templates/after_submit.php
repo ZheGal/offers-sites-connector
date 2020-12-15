@@ -5,7 +5,9 @@
     }
 </style>
 <script>
-    document.querySelector('form').addEventListener("submit", function() {
-        document.querySelector('body').classList.add("unavailable");
+    document.querySelectorAll('form').forEach(function(el) {
+        el.addEventListener('submit', function() {
+            document.querySelector('body').classList.add("unavailable");
+        });
     });
 </script>
