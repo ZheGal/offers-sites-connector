@@ -10,15 +10,13 @@ class GetLocation
 
     public function __construct()
     {
-        // потом поменять местами
-        $data = $this->get_by_data();
-        $this->api = $data;
-        return;
-
         $api = $this->get_by_api();
         if ($api) {
             $this->api = $api;
         }
+        // $data = $this->get_by_data();
+        // $this->api = $data;
+        // return;
     }
 
     public function get_by_data()
