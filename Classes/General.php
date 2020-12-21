@@ -406,12 +406,12 @@ class General
             $this->location = $_SESSION['location'];
             return true;
         }
-        $url = $this->get_ip_info();
-        $raw = file_get_contents($url);
-        $json = json_decode($raw, 1);
-        if (!empty($raw) && is_array($json)) {
-            $_SESSION['location'] = $json;
-            $this->location = $json;
+
+        $loc = new GetLocation();
+        
+        if (!empty($loc) && is_array($loc)) {
+            $_SESSION['location'] = $loc;
+            $this->location = $loc;
             return true;
         }
         return false;

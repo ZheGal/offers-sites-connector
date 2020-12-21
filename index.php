@@ -1,5 +1,6 @@
 <?php
 require_once('autoload.php');
+require_once('./vendor/autoload.php');
 
 session_start();
 
@@ -36,3 +37,13 @@ if (isset($_SESSION['form_fields'])) {
 }
 
 $site->run();
+
+// helpers
+
+function dd($d)
+{
+    echo "<pre style=\"color: #000;background-color: #e6e6e6;padding: 1rem;\">";
+    var_dump($d);
+    echo "</pre>";
+    die;
+}

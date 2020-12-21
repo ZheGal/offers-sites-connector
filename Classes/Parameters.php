@@ -83,7 +83,9 @@ class Parameters extends General
     public function get_pixel_params()
     {
         $result = [];
-        if (isset($_GET['facebook'])) {
+        if (isset($_GET['pxl'])) {
+            $result['code'] = $_GET['pxl'];
+        } elseif (isset($_GET['facebook'])) {
             $result['code'] = $_GET['facebook'];
         } else {
             $result['code'] = ($this->settings->facebook) ? $this->settings->facebook : false;
