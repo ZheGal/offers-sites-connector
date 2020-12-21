@@ -10,6 +10,7 @@ class GetLocation
     {
         // потом поменять местами
         $data = $this->get_by_data();
+        
         return $data;
 
         $api = $this->get_by_api();
@@ -20,23 +21,18 @@ class GetLocation
 
     public function get_by_data()
     {
-        $datFile = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'GeoLite2-City.mmdb']);
+        $datFile = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'GeoLite2-Country.mmdb']);
         $reader = new Reader($datFile);
 
         $userIp = $this->get_user_ip();
         if ($userIp == '127.0.0.1') {
             return false;
         }
-        $reader = $reader->city($userIp);
+        $reader = $reader->country($userIp);
 
         $array = [
             'ip' => $userIp,
-            'city' => $reader->city->name,
-            'region' => $reader->mostSpecificSubdivision->name,
-            'country' => $reader->country->isoCode,
-            'postal' => $reader->postal->code,
-            'location' => $reader->location->latitude.','.$reader->location->longitude,
-            'timezone' => $reader->location->timeZone
+            'country' => $reader->country->isoCode
         ];
         
         return $array;
