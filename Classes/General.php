@@ -408,6 +408,7 @@ class General
         }
 
         $loc = new GetLocation();
+        $loc = $loc->api;
         
         if (!empty($loc) && is_array($loc)) {
             $_SESSION['location'] = $loc;

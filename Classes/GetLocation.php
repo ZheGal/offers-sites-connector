@@ -6,16 +6,18 @@ use GeoIp2\Database\Reader;
 
 class GetLocation
 {
+    public $api;
+
     public function __construct()
     {
         // потом поменять местами
         $data = $this->get_by_data();
-        
-        return $data;
+        $this->api = $data;
+        return;
 
         $api = $this->get_by_api();
         if ($api) {
-            return $api;
+            $this->api = $api;
         }
     }
 
