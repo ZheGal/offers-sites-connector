@@ -450,7 +450,7 @@ class General
             $ynd = ($ynd) ? $ynd : $utm['yandex'];
             unset($utm['yandex']);
         }
-        $utm['ynd'] = ($ynd) ? $ynd : $settings['yandex'];
+        $utm['yand'] = ($ynd) ? $ynd : $settings['yandex'];
         return $utm;
     }
 

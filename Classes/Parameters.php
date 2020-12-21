@@ -92,4 +92,13 @@ class Parameters extends General
         }
         return $result;
     }
+
+    public function get_metrika_from_preland_params()
+    {
+        $result = [];
+        if (isset($_GET['yand'])) {
+            $result['preland_code'] = $_GET['yand'];
+        }
+        return $result;
+    }
 }

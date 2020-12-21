@@ -30,6 +30,7 @@ $site->set('phone_code', $templates->get('phone_code'));
 $site->set('partner_name', $site->get_partner());
 $site->set('prokl_link', $site->get_relink());
 $site->set('metrika_code', $site->get_metrika_code());
+$site->set('metrika_preland', $templates->get('metrika_from_preland'));
 
 // Если пользователь заполнял форму и его редиректнуло на главную, заполнить поля
 if (isset($_SESSION['form_fields'])) {
