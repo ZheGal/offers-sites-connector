@@ -10,8 +10,10 @@ return [
         'global' => 0,
         'neogara_js' => 0
     ],
-    'language' => '',
-    'sitename' => '',
+    'country' => '', // для указания дефолтной страны
+    'intlToken' => '',  // для указания токена для определения страны
+    // 'language' => '',
+    // 'sitename' => '',
     'domain' => '',
     'cloakit' => '',
     // 'relink' => '', // для прокл

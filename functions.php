@@ -2,6 +2,7 @@
 
 function get_user_ip()
 {
+    return '185.41.250.246';
     $c = false;
     
     if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {

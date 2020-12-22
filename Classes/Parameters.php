@@ -101,4 +101,17 @@ class Parameters extends General
         }
         return $result;
     }
+
+    public function get_intl_tel_input_params()
+    {
+        $result = [];
+        $settings = $this->settings;
+        $country = (isset($settings->country)) ? $settings->country : 'us';
+        $preLocation = new GetLocation();
+        $location = $preLocation->get_all();
+        
+        $result['country'] = (isset($location['country'])) ? $location['country'] : $country;
+        
+        return $result;
+    }
 }
