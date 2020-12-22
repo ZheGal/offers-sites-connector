@@ -119,6 +119,7 @@ class General
     {
         $url = 'https://' . $_SERVER['HTTP_HOST'] . '/api/getLocation.me';
         $view = str_replace('$.get("https://ipinfo.io", function() {}, "jsonp").', '$.get("'.$url.'", function() {}, "jsonp").', $view);
+        $view = str_replace('$.get(\'https://ipinfo.io?\', function() {}, "jsonp")', '$.get(\''.$url.'?\', function() {}, "json")', $view);
         return $view;
     }
 
