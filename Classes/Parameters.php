@@ -19,7 +19,7 @@ class Parameters extends General
         } else {
             $result['code'] = ($this->settings->yandex) ? $this->settings->yandex : false;
         }
-        $result['user_ip'] = $this->get_user_ip();
+        $result['user_ip'] = get_user_ip();
 
         return $result;
     }

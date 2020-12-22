@@ -40,7 +40,7 @@ class Neogara
             'pid' => $this->get_pid(),
             'pipeline' => $this->get_pipeline(),
             'ref' => $this->get_ref(),
-            'ip' => $this->get_user_ip(),
+            'ip' => get_user_ip(),
             'city' => $this->get_user_city(),
             'country' => $this->get_user_country()
         ]);
@@ -92,7 +92,7 @@ class Neogara
             'phone' => $this->get_phone(),
             'email' => $this->get_email(),
             'ref' => $this->get_ref_lead(),
-            'ip' => $this->get_user_ip(),
+            'ip' => get_user_ip(),
             'city' => $this->get_user_city(),
             'country' => $this->get_user_country(),
             'click' => $this->get_click_id(),
