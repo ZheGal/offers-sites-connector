@@ -116,6 +116,12 @@ class General
         echo $view;
     }
 
+    public function check_form($view)
+    {
+        $form = explode("<form", $view);
+        return isset($form[1]);
+    }
+
     public function add_after_submit_script($view)
     {
         $check = explode("<form", $view);
