@@ -368,13 +368,6 @@ class General
         }
     }
 
-    public function get_ip_info()
-    {
-        $ip = get_user_ip();
-        $url = "http://ipinfo.io/{$ip}?token=8b50524357b6bc";
-        return $url;
-    }
-
     public function check_folder()
     {
         $path =  implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', 'public']);

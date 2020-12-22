@@ -67,7 +67,12 @@ class GetLocation
     public function get_by_api()
     {
         $userIp = get_user_ip();
-        $apiUrl = "http://ipinfo.io/{$userIp}?token=8b50524357b6bc";
+        $settings = get_settings();
+
+        $defaultToken = '8b50524357b6bc';
+        $token = (isset($settings['intlToken'])) ? $settings['intlToken'] : $defaultToken;
+        $apiUrl = "http://ipinfo.io/{$userIp}?token={$token}";
+
         $raw = @file_get_contents($apiUrl);
         if (!empty($raw)) {
             $json = json_decode($raw, 1);
