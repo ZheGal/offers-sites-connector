@@ -18,6 +18,7 @@ class General
         $this->check_last_symb();
         $this->get_settings();
         $this->utm_settings();
+        $this->get_location();
     }
 
     public function check_last_symb()
@@ -90,9 +91,6 @@ class General
             $view = $this->inputs_fill_action($view);
         }
         $current = $this->get_ref();
-        if ($this->check_form($view)) {
-            $this->get_location();
-        }
         
         if ($this->get_partner() == 'neogara') {
             $params = ['location' => $this->location];
@@ -390,24 +388,6 @@ class General
         }
     }
 
-    public function get_location()
-    {
-        if (isset($_SESSION['location']) && !empty($_SESSION['location'])) {
-            $this->location = $_SESSION['location'];
-            return true;
-        }
-
-        $loc = new GetLocation();
-        $loc = $loc->api;
-        
-        if (!empty($loc) && is_array($loc)) {
-            $_SESSION['location'] = $loc;
-            $this->location = $loc;
-            return true;
-        }
-        return false;
-    }
-
     public function get_ref()
     {
         $schema = ($_SERVER['REQUEST_SCHEME'] == 'http') ? 'http' : 'https';
@@ -457,5 +437,11 @@ class General
             return "?{$utm[1]}";
         }
         return false;
+    }
+
+    public function get_location()
+    {
+        $app = new GetLocation();
+        return $app->get_all();
     }
 }

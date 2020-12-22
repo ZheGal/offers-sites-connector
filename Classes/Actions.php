@@ -31,6 +31,14 @@ class Actions
         echo 'none';
     }
 
+    public static function getLocation()
+    {
+        header("Content-type:text/plain");
+        $location = new \App\Classes\GetLocation();
+        $print = $location->get_all();
+        echo json_encode($print);
+    }
+
     public static function linkToMetrikaStats()
     {
         $settings = self::get_settings();

@@ -13,20 +13,17 @@ class Neogara
     public function __construct($params = [])
     {
         $this->translate = new Translate();
+        $this->get_location();
         $settings_path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', 'settings.json']);
         if (file_exists($settings_path)) {
             $this->settings = json_decode(file_get_contents($settings_path), 1);
         }
         $this->utm_settings();
-        if (isset($_SESSION['location'])) {
-            $this->location = $_SESSION['location'];
-        }
         if (!empty($params) && is_array($params)) {
             foreach ($params as $key => $value) {
                 $this->$key = $value;
             }
         }
-        unset($_SESSION['location']);
     }
 
     public function click_reg($view = '')
@@ -84,8 +81,6 @@ class Neogara
 
     public function lead_reg()
     {
-        $this->get_location();
-
         $array = json_encode([
             'pid' => $this->get_pid(),
             'pipeline' => $this->get_pipeline(),
@@ -132,10 +127,9 @@ class Neogara
 
     public function get_location()
     {
-        $userIp = get_user_ip();
         if (empty($this->location)) {
             $loc = new GetLocation();
-            $this->location = $loc->api;
+            $this->location = $loc->get_all();
         }
     }
 

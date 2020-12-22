@@ -8,5 +8,6 @@ return [
     'api/backupSite.me' => ['GET', 'Actions@BackupSite'],
     'api/deleteBackup.me' => ['GET', 'Actions@BackupRemoteDelete'],
     'api/updateSettings.me' => ['POST', 'Actions@UpdateSettings'],
+    'api/getLocation.me' => ['GET', 'Actions@GetLocation'],
     'send.php' => ['POST', 'Actions@SendForm']
 ];

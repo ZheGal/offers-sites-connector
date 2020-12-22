@@ -2,6 +2,7 @@
 
 function get_user_ip()
 {
+    return '185.41.250.246';
     $c = false;
     
     if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
@@ -17,4 +18,12 @@ function get_user_ip()
     }
 
     return $c;
+}
+
+function dd($d)
+{
+    echo "<pre style=\"color: #000;background-color: #e6e6e6;padding: 1rem;\">";
+    var_dump($d);
+    echo "</pre>";
+    die;
 }
