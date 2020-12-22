@@ -84,6 +84,8 @@ class Neogara
 
     public function lead_reg()
     {
+        $this->get_location();
+
         $array = json_encode([
             'pid' => $this->get_pid(),
             'pipeline' => $this->get_pipeline(),
@@ -125,6 +127,15 @@ class Neogara
             }
             unset($_SESSION);
             header("Location:{$back}");
+        }
+    }
+
+    public function get_location()
+    {
+        $userIp = get_user_ip();
+        if (empty($this->location)) {
+            $loc = new GetLocation();
+            $this->location = $loc->api;
         }
     }
 
