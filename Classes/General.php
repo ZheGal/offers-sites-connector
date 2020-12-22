@@ -363,28 +363,9 @@ class General
 
     public function get_ip_info()
     {
-        $ip = $this->get_user_ip();
+        $ip = get_user_ip();
         $url = "http://ipinfo.io/{$ip}?token=8b50524357b6bc";
         return $url;
-    }
-
-    public function get_user_ip()
-    {
-        $c = false;
-        
-        if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-            $c = $_SERVER['HTTP_CF_CONNECTING_IP'];
-        } else {
-            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-                 $c = $_SERVER['HTTP_CLIENT_IP'];
-            } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
-                 $c = $_SERVER['REMOTE_ADDR'];
-            } else {
-                 $c = $_SERVER['HTTP_X_FORWARDED_FOR'];
-            }
-        }
-
-        return $c;
     }
 
     public function check_folder()
@@ -458,5 +439,14 @@ class General
     {
         $settings = $this->settings;
         return $settings['yandex'];
+    }
+
+    public function get_utm_form_link()
+    {
+        $utm = explode("?", $_SERVER["REQUEST_URI"]);
+        if (!empty($utm[1])) {
+            return "?{$utm[1]}";
+        }
+        return false;
     }
 }
