@@ -118,7 +118,7 @@ class General
     public function change_url_get_ipinfo($view)
     {
         $url = 'https://' . $_SERVER['HTTP_HOST'] . '/api/getLocation.me';
-        $view = str_replace('$.get("https://ipinfo.io"', '$.get("'.$url.'"', $view);
+        $view = str_replace('$.get("https://ipinfo.io", function() {}, "jsonp").', '$.get("'.$url.'", function() {}, "jsonp").', $view);
         return $view;
     }
 
