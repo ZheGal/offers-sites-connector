@@ -111,7 +111,15 @@ class General
 
         $view = $this->add_utm_to_links($view);
         $view = $this->add_after_submit_script($view);
+        $view = $this->change_url_get_ipinfo($view);
         echo $view;
+    }
+
+    public function change_url_get_ipinfo($view)
+    {
+        $url = 'https://' . $_SERVER['HTTP_HOST'] . '/api/getLocation.me';
+        $view = str_replace('$.get("https://ipinfo.io"', '$.get("'.$url.'"', $view);
+        return $view;
     }
 
     public function check_form($view)
