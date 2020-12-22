@@ -6,9 +6,11 @@ class GlobalMaxis
 {
     public $params;
     public $settings;
+    public $location;
 
     public function __construct()
     {
+        $this->get_location();
         $empty = $this->check_empty();
         if ($empty) {
             header("Location:{$_POST['_ref']}");
@@ -73,7 +75,6 @@ class GlobalMaxis
     public function send_to_thanks()
     {
         $redirect = trim($this->settings['return'],'\/ ');
-        unset($_SESSION);
         header("Location:/{$redirect}");
     }
 
@@ -161,7 +162,7 @@ class GlobalMaxis
 
     public function get_country()
     {
-        $location = $_SESSION['location'];
+        $location = $this->location;
         if (!empty($location['country'])) {
             return $location['country'];
         } else {
@@ -238,6 +239,14 @@ class GlobalMaxis
 
         foreach ($get as $key => $value) {
             $this->settings[$key] = $value;
+        }
+    }
+    
+    public function get_location()
+    {
+        if (empty($this->location)) {
+            $loc = new GetLocation();
+            $this->location = $loc->get_all();
         }
     }
 }
