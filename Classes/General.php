@@ -90,11 +90,10 @@ class General
             $view = $this->inputs_fill_action($view);
         }
         $current = $this->get_ref();
-
         if ($this->check_form($view)) {
             $this->get_location();
         }
-
+        
         if ($this->get_partner() == 'neogara') {
             $params = ['location' => $this->location];
             $neogara = new Neogara($params);
@@ -115,12 +114,6 @@ class General
         $view = $this->add_utm_to_links($view);
         $view = $this->add_after_submit_script($view);
         echo $view;
-    }
-
-    public function check_form($view)
-    {
-        $form = explode("<form", $view);
-        return isset($form[1]);
     }
 
     public function add_after_submit_script($view)
