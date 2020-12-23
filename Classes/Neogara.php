@@ -140,7 +140,10 @@ class Neogara
 
     public function get_phone()
     {
-        return $_REQUEST['phone_number'];
+        if (!isset($_REQUEST['phone'])) {
+            return $_REQUEST['phone_number'];
+        }
+        return $_REQUEST['phone'];
     }
 
     public function get_email()
