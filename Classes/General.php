@@ -179,6 +179,10 @@ class General
     {
         $a = (!empty($_GET)) ? '?'.http_build_query($_GET) : false;
         
+        if (empty($a)) {
+            return $view;
+        }
+        
         $find = preg_match_all('/action=["|\']([\s\S]+?)["|\']/', $view, $forms);
         
         if ($find) {
