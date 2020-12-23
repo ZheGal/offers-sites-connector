@@ -183,8 +183,13 @@ class General
         
         if ($find) {
             foreach ($forms[0] as $id => $form) {
-                $rep = str_replace($forms[1][$id], $forms[1][$id].$a, $form);
-                $view = str_replace($form, $rep, $view);
+                $to = $forms[1][$id].$a;
+                $from = $forms[1][$id];
+                $check = explode($a, $from);
+                if (!isset($check[1])) {
+                    $rep = str_replace($from, $to, $form);
+                    $view = str_replace($form, $rep, $view);
+                }
             }
         }
         return $view;
