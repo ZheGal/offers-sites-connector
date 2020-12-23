@@ -182,7 +182,7 @@ class GlobalMaxis
             'rand_param' => rand(1000000, 99999999),
             'first_name' => htmlentities($_REQUEST["firstname"],ENT_COMPAT,'UTF-8'),
             'second_name' => htmlentities($_REQUEST["lastname"],ENT_COMPAT,'UTF-8'),
-            'phone' => htmlentities($_REQUEST["phone_number"],ENT_COMPAT,'UTF-8'),
+            'phone' => htmlentities($this->get_phone(),ENT_COMPAT,'UTF-8'),
             'email' => htmlentities($_REQUEST["email"],ENT_COMPAT,'UTF-8'),
             'description' => 'description',
             'country' => htmlentities($this->get_country(),ENT_COMPAT,'UTF-8'),
@@ -220,6 +220,14 @@ class GlobalMaxis
             return true;
         }
         return false;
+    }
+
+    public function get_phone()
+    {
+        if (!isset($_REQUEST['phone'])) {
+            return $_REQUEST['phone_number'];
+        }
+        return $_REQUEST['phone'];
     }
 
     public function utm_settings()
