@@ -10,8 +10,23 @@ class Router
     public function __construct()
     {
         $this->method = strtoupper($_SERVER['REQUEST_METHOD']);
-        $path = explode("?", $_SERVER['REQUEST_URI']);
-        $this->path = trim($path[0], '\/ ');
+        $path = $this->get_path();
+        $this->path = trim($path, '\/ ');
+    }
+
+    public function get_path()
+    {
+        $rand = md5(rand(1,999));
+        $exp = explode("?", $_SERVER['REQUEST_URI']);
+        $path = trim($exp[0], '/');
+        $folder = get_root_folder();
+        if (empty($folder)) {
+            return $path;
+        }
+        $folder = $rand.'/'.$folder;
+        $path = $rand.'/'.$path;
+        $result = str_replace($folder, '', $path);
+        return trim($result, '/');
     }
 
     public function get_routes()
@@ -27,7 +42,6 @@ class Router
     public function covergence()
     {
         $routes = $this->get_routes();
-
         return (isset($routes[$this->path]) && $routes[$this->path][0] == $this->method);
     }
 
