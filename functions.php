@@ -83,3 +83,19 @@ function dd($d)
     echo "</pre>";
     die;
 }
+
+function get_root_folder()
+{
+    $scriptName = $_SERVER['SCRIPT_NAME'];
+    $delPath = explode("/app/index.php", $scriptName);
+    return trim($delPath[0],'/');
+}
+
+function removeFolder($filename, $folder)
+{
+    $rand = md5(rand());
+    $filename = $rand.$filename;
+    $folder = $rand.$folder;
+    $result = str_replace($folder, '', $filename);
+    return trim($result);
+}

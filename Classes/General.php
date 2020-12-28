@@ -237,7 +237,14 @@ class General
     {
         $vars = $this->variables;
         $requestAr = explode("?", $_SERVER['REQUEST_URI']);
+        $rootFolder = get_root_folder();
+        
         $fileName = trim($requestAr[0], '\/ ');
+
+        if (!empty($rootFolder)) {
+            $fileName = removeFolder($fileName, $rootFolder);
+        }
+        
         $fileName = (empty($fileName)) ? 'index.php' : $fileName;
 
         if ($this->isCloakit() && $fileName == 'index.php') {
