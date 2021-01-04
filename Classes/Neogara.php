@@ -28,6 +28,8 @@ class Neogara
 
     public function click_reg($view = '')
     {
+        $settings = $this->settings;
+        $subs = getSubs($settings);
         $find = preg_match_all("(<form[^<>]+>)", $view, $out);
         if (isset($out[0]) && empty($out[0])) {
             return $view;
@@ -57,16 +59,19 @@ class Neogara
                 $_SESSION['error'][] = "{$request['statusCode']} {$request['error']}: {$request['message']}";
             }
         }
-
+        
         $inputs = array_diff([
             'ref' => $this->get_ref(),
             'click' => (isset($request['id'])) ? $request['id'] : false
         ], ['']);
+        $inputs = array_merge($inputs, $subs);
 
+        $input_ar = [];
         $input_str = '';
         foreach ($inputs as $key => $value) {
-            $input_str .= "\n\t<input type=\"hidden\" name=\"_{$key}\" value=\"{$value}\">";
+            $input_ar[] = "<input type=\"hidden\" name=\"_{$key}\" value=\"{$value}\">";
         }
+        $input_str = implode("\n", $input_ar);
 
         $find = preg_match_all("(<form[^<>]+>)", $view, $out);
         
@@ -81,7 +86,8 @@ class Neogara
 
     public function lead_reg()
     {
-        $array = json_encode([
+        $comes = requestUnderscoresDelete();
+        $prepare = [
             'pid' => $this->get_pid(),
             'pipeline' => $this->get_pipeline(),
             'firstname' => $_REQUEST['firstname'],
@@ -93,7 +99,11 @@ class Neogara
             'city' => $this->get_user_city(),
             'country' => $this->get_user_country(),
             'click' => $this->get_click_id(),
-        ]);
+        ];
+
+        $array = json_encode(
+            array_merge($comes, $prepare)
+        );
 
         $url = 'https://admin.neogara.com/register/lid'; // prod
         

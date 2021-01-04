@@ -99,3 +99,32 @@ function removeFolder($filename, $folder)
     $result = str_replace($folder, '', $filename);
     return trim($result);
 }
+
+function requestUnderscoresDelete()
+{
+    $result = [];
+    foreach ($_REQUEST as $key => $value) {
+        if ($key[0] != '_') {
+            $result[$key] = $value;
+        }
+    }
+    if (isset ($result['PHPSESSID'])) {
+        unset($result['PHPSESSID']);
+    }
+    return $result;
+}
+
+function getSubs($array)
+{
+    $result = [];
+    $array = array_diff($array, ['']);
+    if (!empty($array)) {
+        foreach ($array as $key => $value) {
+            $check = explode('sub', $key);
+            if (empty($check[0]) && isset($check[1])) {
+                $result[$key] = $value;
+            }
+        }
+    }
+    return $result;
+}

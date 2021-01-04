@@ -58,10 +58,10 @@ class Send
             $result = 1;
         }
         
-        if (empty($_POST['phone_number'])) {
-            $_SESSION['error'][] = $translate->t("Phone number is empty");
-            $result = 1;
-        }
+        // if (empty($_POST['phone_number'])) {
+        //     $_SESSION['error'][] = $translate->t("Phone number is empty");
+        //     $result = 1;
+        // }
 
         $back = $_REQUEST['_ref'];
         if ($result) {
