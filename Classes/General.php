@@ -462,4 +462,11 @@ class General
         $app = new GetLocation();
         return $app->get_all();
     }
+
+    public function get_country_english()
+    {
+        $app = new GetLocation();
+        $name = $app->get_country_name();
+        return $name["EN"];
+    }
 }

@@ -82,4 +82,32 @@ class GetLocation
         }
         return false;
     }
+
+    public function get_country_name()
+    {
+        $result = $this->print_session_location();
+        $names = $this->import_country_names();
+        if (!empty($result) && isset($result['country'])) {
+            $code = $result['country'];
+            foreach ($names as $name) {
+                if ($name['alpha2'] == $code) {
+                    return [
+                        'EN' => $name['english'],
+                        'RU' => $name['name']
+                    ];
+                }
+            }
+        }
+    }
+
+    public function import_country_names()
+    {
+        $path = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'country_names.json']);
+        if (!file_exists($path)) {
+            return [];
+        }
+        $raw = file_get_contents($path);
+        $array = json_decode($raw, 1);
+        return $array;
+    }
 }
