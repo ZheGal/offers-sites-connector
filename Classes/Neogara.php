@@ -61,15 +61,15 @@ class Neogara
         }
         
         $inputs = array_diff([
-            'ref' => $this->get_ref(),
-            'click' => (isset($request['id'])) ? $request['id'] : false
+            '_ref' => $this->get_ref(),
+            '_click' => (isset($request['id'])) ? $request['id'] : false
         ], ['']);
         $inputs = array_merge($inputs, $subs);
 
         $input_ar = [];
         $input_str = '';
         foreach ($inputs as $key => $value) {
-            $input_ar[] = "<input type=\"hidden\" name=\"_{$key}\" value=\"{$value}\">";
+            $input_ar[] = "<input type=\"hidden\" name=\"{$key}\" value=\"{$value}\">";
         }
         $input_str = implode("\n", $input_ar);
 
