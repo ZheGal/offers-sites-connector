@@ -3,7 +3,6 @@
 namespace App\Classes;
 
 use App\Classes\Neogara;
-use App\Classes\GlobalMaxis;
 use App\Classes\Translate;
 
 class Send
@@ -34,11 +33,6 @@ class Send
         return true;
     }
 
-    public function global()
-    {
-        $self = new GlobalMaxis();
-    }
-
     public function check_empty_fields()
     {
         $translate = $this->translate;
@@ -57,11 +51,6 @@ class Send
             $_SESSION['error'][] = $translate->t("Email is empty");
             $result = 1;
         }
-        
-        // if (empty($_POST['phone_number'])) {
-        //     $_SESSION['error'][] = $translate->t("Phone number is empty");
-        //     $result = 1;
-        // }
 
         $back = $_REQUEST['_ref'];
         if ($result) {
