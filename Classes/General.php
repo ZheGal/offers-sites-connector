@@ -227,12 +227,6 @@ class General
         return false;
     }
 
-    public function isCloakit()
-    {
-        $settings = $this->settings;
-        return (isset($settings['cloakit']) && !empty($settings['cloakit']));
-    }
-
     public function render()
     {
         $vars = $this->variables;
@@ -246,11 +240,6 @@ class General
         }
         
         $fileName = (empty($fileName)) ? 'index.php' : $fileName;
-
-        if ($this->isCloakit() && $fileName == 'index.php') {
-            $cloak = new \App\Classes\Cloakit($this->settings);
-            $fileName = $cloak->connect();
-        }
 
         $fileNamePath = $this->get_file_path($fileName);
 
@@ -344,7 +333,7 @@ class General
     {
         if (isset($_GET['partner'])) {
             $gets = $_GET['partner'];
-            if ($gets == 'global' or $gets == 'neogara' or $gets == 'neogara_js') {
+            if ($gets == 'neogara' or $gets == 'neogara_js') {
                 return $gets;
             }
         }

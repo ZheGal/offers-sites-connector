@@ -36,18 +36,6 @@ class Actions
         }
     }
 
-    public static function linkToCloakIt()
-    {
-        $settings = self::get_settings();
-        if (isset($settings['cloakit']) && $settings['cloakit'] != '') {
-            $url = 'https://panel.cloakit.space/campaign/' . $settings['cloakit'];
-            header("Location:{$url}");
-        } else {
-            header("Content-type:text/plain");
-            echo 'Cloakit parameter is empty';
-        }
-    }
-
     public static function sendForm()
     {
         $send = new Send();
