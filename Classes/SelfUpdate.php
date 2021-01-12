@@ -4,8 +4,8 @@ namespace App\Classes;
 
 class SelfUpdate
 {
-    public $repository = 'https://github.com/ZheGal/offers-sites-connector/archive/main.zip';
-    public $folder = 'offers-sites-connector-main';
+    public $repository = 'https://github.com/ZheGal/offers-sites-connector/archive/neogara.zip';
+    public $folder = 'offers-sites-connector-neogara';
 
     public function __construct()
     {
