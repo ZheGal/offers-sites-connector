@@ -11,11 +11,6 @@ class Actions
         return new \App\Classes\SelfUpdate();
     }
 
-    public static function makePublicCopy()
-    {
-        return new \App\Classes\SiteCopy();
-    }
-
     public static function updateSettings()
     {
         echo 'none';
@@ -90,7 +85,7 @@ class Actions
 
         if (isset($_GET['partner'])) {
             $gets = $_GET['partner'];
-            if ($gets == 'global' or $gets == 'neogara' or $gets == 'neogara_js') {
+            if ($gets == 'neogara' or $gets == 'neogara_js') {
                 $action = $gets;
             }
         }
