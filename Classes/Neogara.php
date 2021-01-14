@@ -90,8 +90,8 @@ class Neogara
         $prepare = [
             'pid' => $this->get_pid(),
             'pipeline' => $this->get_pipeline(),
-            'firstname' => $_REQUEST['firstname'],
-            'lastname' => $_REQUEST['lastname'],
+            'firstname' => lcfirst(trim($_REQUEST['firstname'])),
+            'lastname' => lcfirst(trim($_REQUEST['lastname'])),
             'phone' => $this->get_phone(),
             'email' => $this->get_email(),
             'ref' => $this->get_ref_lead(),
@@ -153,12 +153,12 @@ class Neogara
         if (!isset($_REQUEST['phone'])) {
             return $_REQUEST['phone_number'];
         }
-        return $_REQUEST['phone'];
+        return trim($_REQUEST['phone']);
     }
 
     public function get_email()
     {
-        return $_REQUEST['email'];
+        return trim($_REQUEST['email']);
     }
 
     public function get_pid()
