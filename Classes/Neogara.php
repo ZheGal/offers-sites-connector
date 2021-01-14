@@ -90,8 +90,8 @@ class Neogara
         $prepare = [
             'pid' => $this->get_pid(),
             'pipeline' => $this->get_pipeline(),
-            'firstname' => lcfirst(trim($_REQUEST['firstname'])),
-            'lastname' => lcfirst(trim($_REQUEST['lastname'])),
+            'firstname' => str_replace(' ', '', ucfirst(trim($_REQUEST['firstname']))),
+            'lastname' => str_replace(' ', '', ucfirst(trim($_REQUEST['lastname']))),
             'phone' => $this->get_phone(),
             'email' => $this->get_email(),
             'ref' => $this->get_ref_lead(),
