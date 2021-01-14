@@ -158,7 +158,9 @@ class Neogara
 
     public function get_email()
     {
-        return trim($_REQUEST['email']);
+        $email = str_replace(' ', '', $_REQUEST['email']);
+        $email = trim($email);
+        return $email;
     }
 
     public function get_pid()
