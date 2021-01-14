@@ -41,6 +41,7 @@ function get_settings()
         return get_settings();
     }
     $settingsJson = utm_settings($settingsJson);
+    $settingsJson = array_diff($settingsJson, ['']);
 
     return $settingsJson;
 }
