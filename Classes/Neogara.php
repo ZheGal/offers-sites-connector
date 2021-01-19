@@ -43,7 +43,9 @@ class Neogara
             'city' => $this->get_user_city(),
             'country' => $this->get_user_country()
         ]);
-        $url = 'https://admin.neogara.com/clicks'; // prod
+
+        $domain = $this->get_neogara_server_domain();
+        $url = "https://{$domain}/clicks";
         
         $request = $this->send_request([
             'url' => $url,
@@ -105,7 +107,8 @@ class Neogara
             array_merge($comes, $prepare)
         );
 
-        $url = 'https://admin.neogara.com/register/lid'; // prod
+        $domain = $this->get_neogara_server_domain();
+        $url = "https://{$domain}/clicks";
         
         $request = $this->send_request([
             'url' => $url,
@@ -253,6 +256,14 @@ class Neogara
 
         foreach ($get as $key => $value) {
             $this->settings[$key] = $value;
+        }
+    }
+
+    private function get_neogara_server_domain()
+    {
+        $domain = 'admin.neogara.com';
+        if (isset($_GET['action']) && $_GET['action'] == 'test') {
+            $domain = "dev.{$domain}";
         }
     }
 }
