@@ -168,14 +168,13 @@ class Neogara
 
     public function get_pid()
     {
-        return ($_GET['pid']) ? $_GET['pid'] : $this->settings['pid'];
+        return (isset($_GET['pid'])) ? $_GET['pid'] : $this->settings['pid'];
     }
 
     public function get_pipeline()
     {
         if (!isset($_GET['group'])) {
             $group = $this->settings['group'];
-            $offer = $this->settings['offer'];
             if (isset($group) && !empty($group)) {
                 return $group;
             }
