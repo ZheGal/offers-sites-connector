@@ -108,7 +108,7 @@ class Neogara
         );
 
         $domain = $this->get_neogara_server_domain();
-        $url = "https://{$domain}/clicks";
+        $url = "https://{$domain}/register/lid";
         
         $request = $this->send_request([
             'url' => $url,
