@@ -427,7 +427,7 @@ class General
             $ynd = ($ynd) ? $ynd : $utm['yandex'];
             unset($utm['yandex']);
         }
-        $utm['yand'] = ($ynd) ? $ynd : $settings['yandex'];
+        $utm['yand'] = (isset($ynd) && !empty($ynd) && $ynd != '') ? $ynd : $settings['yandex'];
         return $utm;
     }
 

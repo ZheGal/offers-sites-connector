@@ -15,7 +15,9 @@ class Translate
         $spath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', 'settings.json']);
         $settings = json_decode(file_get_contents($spath), 1);
 
-        $this->lang = $settings['language'];
+        if (isset($settings['language'])) {
+            $this->lang = $settings['language'];
+        }
     }
 
     public function t($str = '')

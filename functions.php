@@ -117,15 +117,19 @@ function requestUnderscoresDelete()
 
 function getSubs($array)
 {
-    $result = [];
-    $array = array_diff($array, ['']);
-    if (!empty($array)) {
-        foreach ($array as $key => $value) {
-            $check = explode('sub', $key);
-            if (empty($check[0]) && isset($check[1])) {
-                $result[$key] = $value;
+    if (is_array($array) && !empty($array)) {
+        $result = [];
+        $array = array_filter($array, function($element) {
+            return !empty($element);
+        });
+        if (!empty($array)) {
+            foreach ($array as $key => $value) {
+                $check = explode('sub', $key);
+                if (empty($check[0]) && isset($check[1])) {
+                    $result[$key] = $value;
+                }
             }
         }
+        return $result;
     }
-    return $result;
 }
