@@ -265,5 +265,6 @@ class Neogara
         if (isset($_GET['action']) && $_GET['action'] == 'test') {
             $domain = "dev.{$domain}";
         }
+        return $domain;
     }
 }
