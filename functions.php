@@ -41,9 +41,11 @@ function get_settings()
         return get_settings();
     }
     $settingsJson = utm_settings($settingsJson);
-    $settingsJson = array_filter($settingsJson, function($element) {
-        return !empty($element);
-    });
+    if (!empty($settingsJson)) {
+        $settingsJson = array_filter($settingsJson, function($element) {
+            return !empty($element);
+        }); 
+    }
 
     return $settingsJson;
 }
