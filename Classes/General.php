@@ -251,6 +251,8 @@ class General
             $content = ob_get_contents();
             ob_end_clean();
             return $content;
+        } else {
+            return $this->error(404);
         }
 
         return false;
