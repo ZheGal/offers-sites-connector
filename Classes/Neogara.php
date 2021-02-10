@@ -153,7 +153,7 @@ class Neogara
 
     public function get_phone()
     {
-        if (!isset($_REQUEST['phone'])) {
+        if (!isset($_REQUEST['phone']) or $_REQUEST['phone'] == '') {
             return $_REQUEST['phone_number'];
         }
         return trim($_REQUEST['phone']);
