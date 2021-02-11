@@ -33,6 +33,7 @@ $site->set('metrika_preland', $templates->get('metrika_from_preland'));
 $site->set('utm_form', $site->get_utm_form_link());
 $site->set('intl_tel_input', $templates->get('intl_tel_input'));
 $site->set('country_english', $site->get_country_english());
+$site->set('country_code', $site->get_country_code());
 
 // Если пользователь заполнял форму и его редиректнуло на главную, заполнить поля
 if (isset($_SESSION['form_fields'])) {
