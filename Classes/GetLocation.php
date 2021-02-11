@@ -93,7 +93,8 @@ class GetLocation
                 if ($name['alpha2'] == $code) {
                     return [
                         'EN' => $name['english'],
-                        'RU' => $name['name']
+                        'RU' => $name['name'],
+                        'code' => $code
                     ];
                 }
             }
