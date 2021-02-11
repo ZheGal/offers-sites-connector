@@ -471,4 +471,11 @@ class General
         $name = $app->get_country_name();
         return $name["EN"];
     }
+
+    public function get_country_code()
+    {
+        $app = new GetLocation();
+        $name = $app->get_country_name();
+        return $name["code"];
+    }
 }
