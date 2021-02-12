@@ -364,7 +364,7 @@ class General
             }
             return $all[0];
         }
-        else return false;
+        else return 'neogara';
     }
 
     public function add_neo_js($view)
