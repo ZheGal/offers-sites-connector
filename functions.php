@@ -81,14 +81,6 @@ function utm_settings($array)
     return $array;
 }
 
-function dd($d)
-{
-    echo "<pre style=\"color: #000;background-color: #e6e6e6;padding: 1rem;\">";
-    var_dump($d);
-    echo "</pre>";
-    die;
-}
-
 function get_root_folder()
 {
     $scriptName = $_SERVER['SCRIPT_NAME'];

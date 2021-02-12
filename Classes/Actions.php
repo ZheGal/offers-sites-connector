@@ -11,32 +11,12 @@ class Actions
         return new \App\Classes\SelfUpdate();
     }
 
-    public static function backupRemoteDelete()
-    {
-        return new \App\Classes\BackupRemove();
-    }
-
-    public static function makePublicCopy()
-    {
-        return new \App\Classes\SiteCopy();
-    }
-
-    public static function backupSite()
-    {
-        return new \App\Classes\BackupSite();
-    }
-
-    public static function updateSettings()
-    {
-        echo 'none';
-    }
-
     public static function getLocation()
     {
         header("Content-type:text/plain");
         $location = new \App\Classes\GetLocation();
         $print = $location->get_all();
-        echo json_encode($print);
+        echo json_encode($print, JSON_PRETTY_PRINT);
     }
 
     public static function linkToMetrikaStats()
@@ -47,7 +27,9 @@ class Actions
             header("Location:{$url}");
         } else {
             header("Content-type:text/plain");
-            echo 'Metrika parameter is empty';
+            echo json_encode([
+                'message' => 'Metrika parameter is empty'
+            ], JSON_PRETTY_PRINT);
         }
     }
 
@@ -59,7 +41,9 @@ class Actions
             header("Location:{$url}");
         } else {
             header("Content-type:text/plain");
-            echo 'Cloakit parameter is empty';
+            echo json_encode([
+                'message' => 'Cloakit parameter is empty'
+            ], JSON_PRETTY_PRINT);
         }
     }
 
@@ -67,6 +51,7 @@ class Actions
     {
         $send = new Send();
         $settings = self::get_settings();
+        $action = 'neogara';
 
         if (isset ($settings['partners']) && !isset($settings['partner'])) {
             $settings['partner'] = $settings['partners'];
