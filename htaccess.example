@@ -10,6 +10,8 @@ RewriteRule ^(.*)\.php$ app/index.php
 RewriteRule ^(.*)\.html$ app/index.php
 RewriteRule ^(.*)\.htm$ app/index.php
 RewriteRule ^(.*)\.me$ app/index.php
+RewriteRule ^api/(.*)$ app/index.php
+RewriteRule ^app/(.*)$ app/index.php
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
