@@ -128,8 +128,8 @@ class Neogara
         }
 
         if ($request['result'] == 'ok') {
-            if (isset($result['cabinetUrl'])) {
-                $_SESSION['redirect'] = $result['cabinetUrl'];
+            if (isset($request['cabinetUrl'])) {
+                $_SESSION['redirect'] = $request['cabinetUrl'];
             }
             $back = "/".$this->settings['return'];
             $request = explode("?", $_SERVER['REQUEST_URI']);
