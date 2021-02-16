@@ -107,6 +107,7 @@ class General
         $view = $this->check_utm($view);
         $view = $this->check_errors($view);
 
+        $this->check_redirect_session();
         unset($_SESSION);
 
         $view = $this->add_utm_to_links($view);
@@ -477,5 +478,14 @@ class General
         $app = new GetLocation();
         $name = $app->get_country_name();
         return $name["code"];
+    }
+
+    public function check_redirect_session()
+    {
+        if (isset($_SESSION['redirect'])) {
+            $link = $_SESSION['redirect'];
+            unset($_SESSION['redirect']);
+            header( 'refresh: 5; url=' . $link );
+        }
     }
 }
