@@ -15,6 +15,7 @@ class SelfUpdate
             $unpack = $this->unpackArchive($filename); // распаковать архив
             $delete = $this->deleteIsset(); // удалить содержимое папки app
             $move = $this->moveFromIsset();
+            $this->update_htaccess();
         }
     }
     
@@ -73,6 +74,18 @@ class SelfUpdate
             
             echo "Deleting archive: ";
             echo unlink($filename['path']) . "\n";
+        }
+    }
+
+    public function update_htaccess()
+    {
+        $path = '../.htaccess';
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        
+        if (file_exists('htaccess.example')) {
+            file_put_contents($path, file_get_contents('htaccess.example'));
         }
     }
 }
