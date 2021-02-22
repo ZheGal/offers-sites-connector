@@ -113,6 +113,7 @@ class General
         $view = $this->add_utm_to_links($view);
         $view = $this->add_after_submit_script($view);
         $view = $this->change_url_get_ipinfo($view);
+        $view = $this->replace_braces_to_vars($view);
         echo $view;
     }
 
@@ -487,5 +488,25 @@ class General
             unset($_SESSION['redirect']);
             header( 'refresh: 5; url=' . $link );
         }
+    }
+
+    public function replace_braces_to_vars($view)
+    {
+        $matches = [];
+        $re = '/{{(.+)}}/m';
+        preg_match_all($re, $view, $matches, PREG_SET_ORDER, 0);
+        if (!empty($matches)) {
+            foreach ($matches as $match) {
+                
+                $var = trim($match[1], '\'"\/ ');
+                if (isset ($this->variables[$var])) {
+                    $view = str_replace($match[0], $this->variables[$var], $view);
+                } else {
+                    $view = str_replace($match[0], '', $view);
+                }
+                
+            }
+        }
+        return $view;
     }
 }
