@@ -40,6 +40,11 @@ class GetLocation
     public function print_session_location()
     {
         $userIp = get_user_ip();
+        
+        if ($userIp == false) {
+            return false;
+        }
+
         $base = $_SESSION['locations'][$userIp];
         $json = base64_decode($base);
         return json_decode($json, 1);
@@ -49,6 +54,10 @@ class GetLocation
     {
         $userIp = get_user_ip();
         $settings = get_settings();
+
+        if ($userIp == false) {
+            return false;
+        }
 
         $defaultToken = '8b50524357b6bc';
         $token = (isset($settings['intlToken'])) ? $settings['intlToken'] : $defaultToken;
@@ -67,6 +76,13 @@ class GetLocation
     public function get_country_name()
     {
         $result = $this->print_session_location();
+        if ($result == false) {
+            return [
+                'EN' => '',
+                'RU' => '',
+                'code' => ''
+            ];
+        }
         $names = $this->import_country_names();
         if (!empty($result) && isset($result['country'])) {
             $code = $result['country'];

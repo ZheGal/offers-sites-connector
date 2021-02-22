@@ -181,6 +181,9 @@ class Neogara
             if (isset($group) && !empty($group)) {
                 return $group;
             }
+            if (empty($offer) && empty($group)) {
+                return false;
+            }
             return ($offer) ? $offer : $group;
         } else {
             return $_GET['group'];
@@ -200,17 +203,23 @@ class Neogara
 
     public function get_user_ip()
     {
-        return $this->location['ip'];
+        if (isset($this->location['ip'])) {
+            return $this->location['ip'];
+        }
     }
 
     public function get_user_city()
     {
-        return $this->location['city'];
+        if (isset($this->location)) {
+            return $this->location['city'];
+        }
     }
 
     public function get_user_country()
     {
-        return $this->location['country'];
+        if (isset($this->location['country'])) {
+            return $this->location['country'];
+        }
     }
 
     public function send_request($data)

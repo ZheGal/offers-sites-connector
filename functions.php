@@ -16,6 +16,10 @@ function get_user_ip()
         }
     }
 
+    if ($c == '127.0.0.1') {
+        $c = false;
+    }
+
     return $c;
 }
 
