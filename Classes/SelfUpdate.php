@@ -80,9 +80,6 @@ class SelfUpdate
     public function update_htaccess()
     {
         $path = '../.htaccess';
-        if (file_exists($path)) {
-            unlink($path);
-        }
         
         if (file_exists('htaccess.example')) {
             file_put_contents($path, file_get_contents('htaccess.example'));
