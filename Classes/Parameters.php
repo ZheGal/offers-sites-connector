@@ -2,6 +2,11 @@
 
 namespace App\Classes;
 
+/************************************/
+/* ynd - метрика для данного сайта  */
+/* yand - метрика из преленда       */
+/************************************/
+
 class Parameters extends General
 {
     public function __construct()
@@ -14,6 +19,12 @@ class Parameters extends General
     public function get_metrika_params()
     {
         $result = [];
+
+        if (isset($_GET['ynd'])) {
+            $_GET['yandex'] = $_GET['ynd'];
+            unset($_GET['ynd']);
+        }
+        
         if (isset($_GET['yandex'])) {
             $result['code'] = $_GET['yandex'];
         } else {
@@ -27,6 +38,12 @@ class Parameters extends General
     public function get_metrika_thanks_params()
     {
         $result = [];
+
+        if (isset($_GET['ynd'])) {
+            $_GET['yandex'] = $_GET['ynd'];
+            unset($_GET['ynd']);
+        }
+        
         if (isset($_GET['yandex'])) {
             $result['code'] = $_GET['yandex'];
         } else {
@@ -39,6 +56,12 @@ class Parameters extends General
     public function get_metrika_targetclick_params()
     {
         $result = [];
+
+        if (isset($_GET['ynd'])) {
+            $_GET['yandex'] = $_GET['ynd'];
+            unset($_GET['ynd']);
+        }
+        
         if (isset($_GET['yandex'])) {
             $result['code'] = $_GET['yandex'];
         } else {
