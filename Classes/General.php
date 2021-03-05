@@ -486,7 +486,7 @@ class General
         if (isset($_SESSION['redirect'])) {
             $link = $_SESSION['redirect'];
             unset($_SESSION['redirect']);
-            header( 'refresh: 5; url=' . $link );
+            header( 'refresh: 3; url=' . $link );
         }
     }
 
