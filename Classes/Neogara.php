@@ -107,6 +107,10 @@ class Neogara
             array_merge($comes, $prepare)
         );
 
+        if (isset($prepare['phone'])) {
+            unset($comes['phone_number']);
+        }
+
         $domain = $this->get_neogara_server_domain();
         $url = "https://{$domain}/register/lid";
         
